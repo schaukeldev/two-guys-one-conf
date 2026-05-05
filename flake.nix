@@ -1,5 +1,5 @@
 {
-  description = "vaaski's nixify-everything™ config";
+  description = "two-guys-one-conf";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";

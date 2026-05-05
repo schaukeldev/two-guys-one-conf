@@ -31,12 +31,12 @@ sudo nix run nix-darwin/master#darwin-rebuild -- switch
 ```
 
 ```sh
-sudo darwin-rebuild switch --flake github:vaaski/nixify#m2-air
+sudo darwin-rebuild switch --flake github:fentsoft/two-guys-one-conf#m2-air
 ```
 
 ```sh
 sudo rm -fr /etc/nix-darwin/*
-sudo git clone https://github.com/vaaski/nixify /etc/nix-darwin
+sudo git clone https://github.com/fentsoft/two-guys-one-conf /etc/nix-darwin
 sudo chown -R $(id -nu):$(id -ng) /etc/nix-darwin
 cd /etc/nix-darwin
 
