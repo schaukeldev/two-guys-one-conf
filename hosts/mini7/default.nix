@@ -6,6 +6,7 @@
   imports = [
     ./hardware-configuration.nix
     ./komodo.nix
+    ./restic.nix
   ];
 
   my.username = "p";
