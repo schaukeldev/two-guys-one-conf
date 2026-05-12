@@ -32,6 +32,7 @@
         ];
         casks = [
           "aerospace"
+          "arduino-ide"
           "audacity"
           "anaconda"
           "bambu-studio"
