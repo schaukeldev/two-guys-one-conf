@@ -32,7 +32,7 @@ export default {
   ],
   handlers: [
     {
-      match: finicky.matchHostnames("open.spotify.com"),
+      match: finicky.matchHostnames(["open.spotify.com", "spotify.link"]),
       browser: "Spotify",
     },
     {
