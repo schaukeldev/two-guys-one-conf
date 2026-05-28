@@ -426,7 +426,7 @@
               "BTTPredefinedActionType" : 206,
               "BTTPredefinedActionName" : "Execute Shell Script  or  Task",
               "BTTShellTaskActionScript" : "",
-              "BTTShellTaskActionConfig" : "/usr/bin/afplay:::/Users/A200007423/projects/soundingboard/public/sound/fart.mp3:::-:::",
+              "BTTShellTaskActionConfig" : "/usr/bin/afplay:::/Users/o/projects/soundingboard/public/sound/fart.mp3:::-:::",
               "BTTShortcutKeyboardType" : 0,
               "BTTShortcutKeyCode" : -1,
               "BTTOrder" : 11,
