@@ -15,6 +15,8 @@
     AppleAccentColor = 6;
   };
 
+  my.homebrew.casks = ["bruno"];
+
   system.defaults.dock.persistent-apps = [
     "/System/Applications/Messages.app"
     "/Applications/Spark Desktop.app"
