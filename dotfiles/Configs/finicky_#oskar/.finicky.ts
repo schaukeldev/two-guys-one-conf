@@ -1,6 +1,6 @@
 import type { FinickyConfig } from "/Applications/Finicky.app/Contents/Resources/finicky.d.ts"
 
-const DEFAULT_BROWSER = "/Applications/Helium.app"
+const DEFAULT_BROWSER = "/Applications/Brave Browser.app"
 const WORK_BROWSER = "/Applications/Google Chrome.app"
 
 const anyHostEndsWith = (url: URL, hosts: string[]) => {
