@@ -42,6 +42,7 @@
           "audacity"
           "anaconda"
           "bambu-studio"
+          "basictex"
           "battery-toolkit"
           "betterdisplay"
           "blender"
