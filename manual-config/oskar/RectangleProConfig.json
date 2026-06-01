@@ -41,7 +41,7 @@
       "int" : 0
     },
     "appSpecs" : {
-      "string" : "[{\"displayRestored\":true,\"id\":31,\"children\":[{\"w\":\"1252\",\"display\":4,\"id\":17,\"h\":\"1050\",\"bundleId\":\"com.tdesktop.Telegram\",\"title\":\"UM8nS9fRCQDTKZsTDBmAjC2YDOPVFRIQj6igijQ3AoHTXlMOMYSBTkyQCs58nW51lIn2HbI27QLcj8FIsfeN\",\"otherAppOperation\":1,\"loc\":3,\"displayFrame\":[[2048,72],[1920,1080]],\"titleMatching\":1},{\"w\":\"800\",\"display\":4,\"id\":243,\"h\":\"1050\",\"bundleId\":\"net.whatsapp.WhatsApp\",\"title\":\"PO6U6ygyettaNxQqrHKlP36LiOog+nO0qQsYySPNr\\\/W72jwk+EPO\",\"otherAppOperation\":1,\"loc\":4,\"displayFrame\":[[2048,72],[1920,1080]],\"titleMatching\":1},{\"w\":\"1210\",\"display\":2,\"id\":263,\"h\":\"949\",\"bundleId\":\"com.spotify.client\",\"title\":\"hdgSzbvTZLJKmQElY2nisN3EQARJVXSN\\\/FLHxkMhk3\\\/b3nVY696F6eVZIg==\",\"otherAppOperation\":1,\"loc\":4,\"displayFrame\":[[-1706,-910],[1512,982]],\"titleMatching\":1},{\"displayName\":\"DELL U2419H\",\"w\":\"1305\",\"displayID\":\"E418C307-10A8-4A5D-90A1-2DEDA47ED302\",\"title\":\"ohxwsdzgOT6fdPKhrWBRrCVGPiJvWfmdRZVe7hRc3sjeTXer\",\"titleMatching\":1,\"display\":-3,\"id\":297,\"h\":\"800\",\"displayFrame\":[[-1920,72],[1920,1080]],\"bundleId\":\"com.microsoft.Outlook\",\"loc\":9,\"otherAppOperation\":1,\"x\":\"-1860\",\"y\":\"72\"},{\"w\":\"1305\",\"x\":\"-1860\",\"display\":-3,\"id\":329,\"h\":\"740\",\"bundleId\":\"com.microsoft.teams2\",\"title\":\"FiDP\\\/+q7nQHktsNWd7c3CLdbvDjXJmyHMbmkc57Qmp3dPLk=\",\"otherAppOperation\":1,\"loc\":9,\"displayFrame\":[[-1920,72],[1920,1080]],\"y\":\"382\",\"titleMatching\":2},{\"w\":\"1364\",\"x\":\"-1920\",\"display\":-3,\"id\":367,\"h\":\"800\",\"bundleId\":\"com.readdle.SparkDesktop\",\"title\":\"7JT\\\/4SkMgvoX1XJkPV\\\/Dv1f0gbysm7oVaeJtiD\\\/cFURltKg1VOmx2\\\/E=\",\"otherAppOperation\":1,\"loc\":9,\"displayFrame\":[[-1920,72],[1920,1080]],\"y\":\"143\",\"titleMatching\":1}],\"name\":\"auto position stuff\",\"isGroup\":true,\"onWindowOpen\":true,\"otherAppOperation\":1,\"loc\":0},{\"id\":236,\"children\":[{\"w\":\"1440\",\"display\":1,\"id\":228,\"h\":\"1050\",\"bundleId\":\"net.imput.helium\",\"title\":\"8lKmr7WUWVDSDEqOdnbtUUFszNmMIA4jXKq7BqiszAFixCwTVx+RHHyBSFa4og==\",\"otherAppOperation\":1,\"titleSubstring\":\"\",\"titleRegex\":\"- YouTube - Helium$\",\"loc\":4,\"displayFrame\":[[-1920,72],[1920,1080]],\"titleMatching\":4}],\"name\":\"yt left screen by title\",\"isGroup\":true,\"shortcut\":{\"keyCode\":6,\"modifierFlags\":1310720},\"otherAppOperation\":1,\"loc\":0}]"
+      "string" : "[{\"loc\":0,\"isGroup\":true,\"otherAppOperation\":1,\"name\":\"auto position stuff\",\"shortcut\":{\"keyCode\":37,\"modifierFlags\":786432},\"children\":[{\"displayFrame\":[[2048,72],[1920,1080]],\"h\":\"1050\",\"loc\":3,\"w\":\"1252\",\"display\":4,\"bundleId\":\"com.tdesktop.Telegram\",\"otherAppOperation\":1,\"id\":17,\"titleMatching\":1,\"title\":\"Yhm06lgN7x0x1g5qnZ6uhFMRXIzLwt\\\/a7RCvFKuErCys5cLu0m809cLfnj4k7nOjsuuRXbW1iJbShjJ3LPYc\"},{\"displayFrame\":[[2048,72],[1920,1080]],\"h\":\"1050\",\"loc\":4,\"w\":\"800\",\"display\":4,\"bundleId\":\"net.whatsapp.WhatsApp\",\"otherAppOperation\":1,\"id\":243,\"titleMatching\":1,\"title\":\"duYuTUoQfinlBmvG51+bPs9QmIEngLhouhDHqc\\\/6tIhYO2db2mhA\"},{\"displayFrame\":[[-1706,-910],[1512,982]],\"h\":\"949\",\"loc\":4,\"w\":\"1210\",\"display\":2,\"bundleId\":\"com.spotify.client\",\"otherAppOperation\":1,\"id\":263,\"titleMatching\":1,\"title\":\"EnHiDQrwbe8IRJ8iqFaa1ueNDFTuOQG32sfKlkOe2sFX24KyJUFqolMRhA==\"},{\"otherAppOperation\":1,\"displayName\":\"DELL U2419H\",\"h\":\"800\",\"y\":\"72\",\"bundleId\":\"com.microsoft.Outlook\",\"loc\":9,\"id\":297,\"x\":\"-1860\",\"title\":\"RY9J9uWFZzVENZbkus\\\/zSm8vY9fsO\\\/SMu0iDk60nXlB7LGGK\",\"titleMatching\":1,\"w\":\"1305\",\"display\":-3,\"displayFrame\":[[-1920,72],[1920,1080]],\"displayID\":\"E418C307-10A8-4A5D-90A1-2DEDA47ED302\"},{\"displayFrame\":[[-1920,72],[1920,1080]],\"y\":\"382\",\"h\":\"740\",\"loc\":9,\"w\":\"1305\",\"display\":-3,\"bundleId\":\"com.microsoft.teams2\",\"otherAppOperation\":1,\"id\":329,\"titleMatching\":2,\"x\":\"-1860\",\"title\":\"d3bUoJdwRPTSSO8LbiRd7GzZP1H+A01BM9z3nqde2Gqj1gM=\"},{\"displayFrame\":[[-1920,72],[1920,1080]],\"y\":\"143\",\"h\":\"800\",\"loc\":9,\"w\":\"1364\",\"display\":-3,\"bundleId\":\"com.readdle.SparkDesktop\",\"otherAppOperation\":1,\"id\":367,\"titleMatching\":1,\"x\":\"-1920\",\"title\":\"73nsitJSCPsCUXWGSlHtYFuqWyFLRSsV0VeS02m43MDKLykyuqhCKlQ=\"}],\"id\":31,\"onWindowOpen\":true,\"displayRestored\":true},{\"name\":\"yt left screen by title\",\"otherAppOperation\":1,\"children\":[{\"displayFrame\":[[-1920,72],[1920,1080]],\"titleRegex\":\"- YouTube - Helium$\",\"h\":\"1050\",\"loc\":4,\"w\":\"1440\",\"display\":1,\"bundleId\":\"net.imput.helium\",\"otherAppOperation\":1,\"id\":228,\"titleMatching\":4,\"title\":\"eIysW2wQkxTxgIaVkw53wm4cfP5z2qy1e06eSpDALl0BtHM72lHnqNv2SlFgaw==\",\"titleSubstring\":\"\"}],\"loc\":0,\"shortcut\":{\"keyCode\":6,\"modifierFlags\":1310720},\"isGroup\":true,\"id\":236}]"
     },
     "applyGapToEdges" : {
       "int" : 0
@@ -133,6 +133,9 @@
     "fillLeftRightVersion" : {
       "int" : 2
     },
+    "focusRefreshBehavior" : {
+      "int" : 0
+    },
     "footprintAlpha" : {
       "float" : 0.3
     },
@@ -176,6 +179,9 @@
       "int" : 3
     },
     "ignoreBehavior" : {
+      "int" : 0
+    },
+    "ignoreDock" : {
       "int" : 0
     },
     "ignoredSnapAreas" : {
@@ -244,6 +250,9 @@
     "moveCursorAcrossDisplays" : {
       "int" : 0
     },
+    "moveResizeEventThrottling" : {
+      "int" : 0
+    },
     "moveSpecsWhenDisplayMoves" : {
       "int" : 0
     },
@@ -301,6 +310,9 @@
     "repeatedMaximizeRestores" : {
       "int" : 0
     },
+    "resizeFromNearestCorner" : {
+      "int" : 0
+    },
     "resizeOnDirectionalMove" : {
       "bool" : false
     },
@@ -314,7 +326,7 @@
       "int" : 2
     },
     "reticleColor" : {
-      "string" : "{\"red\":0.8,\"green\":0.3,\"alpha\":0.5,\"blue\":0.2}"
+      "string" : "{\"green\":0.3,\"red\":0.8,\"alpha\":0.5,\"blue\":0.2}"
     },
     "reticleDisplayMinDist" : {
       "float" : 0
@@ -505,6 +517,9 @@
     "unhideStashedWhenFrontmost" : {
       "int" : 0
     },
+    "unifiedDisplaySpacesBehavior" : {
+      "int" : 0
+    },
     "unsnapRestore" : {
       "int" : 0
     },
@@ -626,6 +641,6 @@
       "modifierFlags" : 786432
     }
   },
-  "timestamp" : 793817197.243885,
-  "version" : "210"
+  "timestamp" : 802000339.821831,
+  "version" : "223"
 }
