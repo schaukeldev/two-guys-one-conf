@@ -8,13 +8,17 @@ on:
 jobs:
   notify:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ github.event.commits }}
 
     steps:
       - name: Send message to Telegram
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
-          MESSAGE: ${{ github.event.head_commit.message }}
+          MESSAGE: ${{ matrix.message }}
         run: |
           ESCAPED_MESSAGE="$(printf '%s' "$MESSAGE" | sed -e 's/[][\\_*()~`>#+=|{}.!-]/\\&/g')"
           curl -X POST "https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage" \
