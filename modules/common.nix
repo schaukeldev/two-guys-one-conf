@@ -134,6 +134,7 @@ in {
       nixd
       nodejs_24
       pnpm
+      ripgrep
       sops
       stow
       tree
