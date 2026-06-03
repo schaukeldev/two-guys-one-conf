@@ -18,11 +18,36 @@ jobs:
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
-          MESSAGE: ${{ matrix.message }}
+          COMMIT_MESSAGE: ${{ matrix.message }}
+          COMMIT_SHA: ${{ matrix.id }}
+          COMMIT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ matrix.id }}
+          COMMIT_AUTHOR: ${{ matrix.author.name }}
+          PUSHER: ${{ github.event.pusher.name }}
         run: |
-          ESCAPED_MESSAGE="$(printf '%s' "$MESSAGE" | sed -e 's/[][\\_*()~`>#+=|{}.!-]/\\&/g')"
+          escape_markdown() {
+            printf '%s' "$1" | sed -e 's/[][\\_*()~`>#+=|{}.!-]/\\&/g'
+          }
+
+          escape_markdown_url() {
+            printf '%s' "$1" | sed -e 's/[\\)]/\\&/g'
+          }
+
+          SHORT_SHA="${COMMIT_SHA:0:7}"
+          ESCAPED_SHORT_SHA="$(escape_markdown "$SHORT_SHA")"
+          ESCAPED_URL="$(escape_markdown_url "$COMMIT_URL")"
+          ESCAPED_PUSHER="$(escape_markdown "$PUSHER")"
+          ESCAPED_AUTHOR="$(escape_markdown "$COMMIT_AUTHOR")"
+          ESCAPED_MESSAGE="$(escape_markdown "$COMMIT_MESSAGE" | sed 's/^/> /')"
+
+          printf -v TEXT '*New commit pushed*\n\n*Commit:* [%s](%s)\n*Pushed by:* %s\n*Author:* %s\n\n*Message:*\n%s' \
+            "$ESCAPED_SHORT_SHA" \
+            "$ESCAPED_URL" \
+            "$ESCAPED_PUSHER" \
+            "$ESCAPED_AUTHOR" \
+            "$ESCAPED_MESSAGE"
+
           curl -X POST "https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage" \
             --data-urlencode "chat_id=$CHANNEL_ID" \
-            --data-urlencode "text=$ESCAPED_MESSAGE" \
+            --data-urlencode "text=$TEXT" \
             -d "parse_mode=MarkdownV2" \
             -d "disable_notification=true"
