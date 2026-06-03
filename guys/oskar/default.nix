@@ -53,7 +53,6 @@
           "betterdisplay"
           "bettertouchtool"
           "blender"
-          "brave-browser"
           "connectmenow"
           "dbeaver-community"
           "discord"
@@ -87,6 +86,7 @@
           "utm"
           "visual-studio-code"
           "whatsapp"
+          "zen"
         ];
       };
     };
