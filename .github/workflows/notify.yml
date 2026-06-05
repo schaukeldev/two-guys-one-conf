@@ -39,12 +39,12 @@ jobs:
           ESCAPED_AUTHOR="$(escape_markdown "$COMMIT_AUTHOR")"
           ESCAPED_MESSAGE="$(escape_markdown "$COMMIT_MESSAGE" | sed 's/^/> /')"
 
-          printf -v TEXT '*New commit pushed*\n\n*Commit:* [%s](%s)\n*Pushed by:* %s\n*Author:* %s\n\n*Message:*\n%s' \
+          printf -v TEXT '%s\n\n*Commit:* [%s](%s)\n*Pushed by:* %s\n*Author:* %s' \
+            "$ESCAPED_MESSAGE" \
             "$ESCAPED_SHORT_SHA" \
             "$ESCAPED_URL" \
             "$ESCAPED_PUSHER" \
-            "$ESCAPED_AUTHOR" \
-            "$ESCAPED_MESSAGE"
+            "$ESCAPED_AUTHOR"
 
           curl -X POST "https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage" \
             --data-urlencode "chat_id=$CHANNEL_ID" \
