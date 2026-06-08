@@ -67,6 +67,7 @@
           "keepingyouawake"
           "keyboardcleantool"
           "linearmouse"
+          "lm-studio"
           "mullvad-vpn"
           "naps2"
           "obs"
