@@ -31,7 +31,7 @@
 	<key>CPU_mini_alignment</key>
 	<string>left</string>
 	<key>CPU_mini_label</key>
-	<false/>
+	<true/>
 	<key>CPU_mini_position</key>
 	<integer>0</integer>
 	<key>CPU_pieChart_position</key>
@@ -62,12 +62,32 @@
 	<false/>
 	<key>LaunchAtLoginNext</key>
 	<true/>
+	<key>NSNavPanelExpandedSizeForSaveMode</key>
+	<string>{880, 448}</string>
+	<key>NSOSPLastRootDirectory</key>
+	<data>
+	Ym9va5ACAAAAAAUQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	AAAAAAAAAAAAAAAAAJQBAAAEAAAAAwMAAAAAACAHAAAAAQEAAHByaXZhdGUAAwAAAAEB
+	AABldGMACgAAAAEBAABuaXgtZGFyd2luAAAFAAAAAQEAAHBsaXN0AAAAEAAAAAEGAAAQ
+	AAAAIAAAACwAAABAAAAACAAAAAQDAABoRAAAAAAAAAgAAAAEAwAAaUQAAAAAAAAIAAAA
+	BAMAALC2BwAAAAAACAAAAAQDAAAiMA4AAAAAABAAAAABBgAAaAAAAHgAAACIAAAAmAAA
+	AAgAAAAABAAAQcfkQfpoKTkYAAAAAQIAAAIAAAAAAAAADwAAAAAAAAAAAAAAAAAAAAAA
+	AAABBQAACAAAAAEJAABmaWxlOi8vLwwAAAABAQAATWFjaW50b3NoIEhECAAAAAQDAAAA
+	kIKW5wAAAAgAAAAABAAAQcfR8v6AAAAkAAAAAQEAADEzQzUxRTIzLTIyMUUtNEEwMC04
+	QzJGLTM2Rjc1MTNGRTA3RBgAAAABAgAAgQAAAAEAAADvEwAAAQAAAAAAAAAAAAAAAQAA
+	AAEBAAAvAAAAtAAAAP7///8BAAAAAAAAAA4AAAAEEAAAUAAAAAAAAAAFEAAAqAAAAAAA
+	AAAQEAAA0AAAAAAAAABAEAAAwAAAAAAAAAACIAAAiAEAAAAAAAAFIAAA+AAAAAAAAAAQ
+	IAAACAEAAAAAAAARIAAAPAEAAAAAAAASIAAAHAEAAAAAAAATIAAALAEAAAAAAAAgIAAA
+	aAEAAAAAAAAwIAAA8AAAAAAAAAAB0AAA8AAAAAAAAAAQ0AAABAAAAAAAAAA=
+	</data>
 	<key>NSStatusItem Preferred Position CPU_mini</key>
-	<real>360</real>
+	<real>395</real>
 	<key>NSStatusItem Preferred Position Clock_sensors</key>
 	<real>105</real>
+	<key>NSStatusItem Preferred Position RAM_mini</key>
+	<real>358</real>
 	<key>NSStatusItem Preferred Position Sensors_sensors</key>
-	<real>328</real>
+	<real>326</real>
 	<key>NSStatusItem Restore Position Clock_label</key>
 	<integer>5368</integer>
 	<key>NSStatusItem Restore Position Disk_mini</key>
@@ -89,26 +109,32 @@
 		<key>TB Size Mode</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSWindow Frame eu.exelban.Stats.Settings.WindowFrame</key>
+	<string>667 391 728 480 0 0 2048 1122 </string>
 	<key>Network_state</key>
 	<false/>
 	<key>RAM_barChart_position</key>
-	<integer>3</integer>
-	<key>RAM_label_position</key>
-	<integer>0</integer>
-	<key>RAM_lineChart_position</key>
-	<integer>2</integer>
-	<key>RAM_memory_position</key>
 	<integer>5</integer>
-	<key>RAM_mini_position</key>
+	<key>RAM_label_position</key>
+	<integer>2</integer>
+	<key>RAM_lineChart_position</key>
 	<integer>1</integer>
+	<key>RAM_memory_position</key>
+	<integer>7</integer>
+	<key>RAM_mini_position</key>
+	<integer>0</integer>
 	<key>RAM_pieChart_position</key>
-	<integer>4</integer>
-	<key>RAM_state</key>
-	<false/>
-	<key>RAM_tachometer_position</key>
 	<integer>6</integer>
+	<key>RAM_state</key>
+	<true/>
+	<key>RAM_state_position</key>
+	<integer>4</integer>
+	<key>RAM_tachometer_position</key>
+	<integer>8</integer>
+	<key>RAM_text_position</key>
+	<integer>3</integer>
 	<key>RAM_widget</key>
-	<string></string>
+	<string>mini</string>
 	<key>Sensors_barChart_position</key>
 	<integer>1</integer>
 	<key>Sensors_fanControl</key>
@@ -141,8 +167,8 @@
 	<integer>0</integer>
 	<key>fan_1_speed</key>
 	<integer>6800</integer>
-	<key>remote_id</key>
-	<string>27C13695-88BF-4114-9CC1-3E016B58A91D</string>
+	<key>remote_tokens_migrated_to_keychain</key>
+	<true/>
 	<key>runAtLoginInitialized</key>
 	<true/>
 	<key>sensor_Average CPU</key>
@@ -168,12 +194,14 @@
 	<key>setupProcess</key>
 	<true/>
 	<key>support_ts</key>
-	<integer>1766752065</integer>
+	<integer>1779979541</integer>
 	<key>telemetry</key>
 	<false/>
 	<key>updater_check_ts</key>
-	<integer>1766752065</integer>
+	<integer>1780495463</integer>
+	<key>updater_install_ts</key>
+	<integer>1780495470</integer>
 	<key>version</key>
-	<string>2.11.62</string>
+	<string>2.12.16</string>
 </dict>
 </plist>
