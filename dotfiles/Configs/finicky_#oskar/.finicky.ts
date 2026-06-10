@@ -17,7 +17,11 @@ export default {
   rewrite: [
     {
       match: (url) => {
-        return anyHostEndsWith(url, ["teams.cdn.office.net", "protection.outlook.com"])
+        return anyHostEndsWith(url, [
+          "teams.cdn.office.net",
+          "protection.outlook.com",
+          "teams.public.onecdn.static.microsoft",
+        ])
       },
       url: (url) => {
         const targetUrl = url.searchParams.get("url")
