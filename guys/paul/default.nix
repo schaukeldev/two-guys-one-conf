@@ -36,9 +36,14 @@
           "dfu-util"
           "esptool"
           "opensc"
+          "go-task"
+          "gotestsum"
+          "poppler"
+          "ollama"
         ];
         casks = [
           "aerospace"
+          "android-platform-tools"
           "audacity"
           "anaconda"
           "bambu-studio"
