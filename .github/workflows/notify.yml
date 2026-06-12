@@ -23,6 +23,9 @@ jobs:
           COMMIT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ matrix.id }}
           COMMIT_AUTHOR: ${{ matrix.author.name }}
           PUSHER: ${{ github.event.pusher.name }}
+          ADDED_FILES: ${{ toJson(matrix.added) }}
+          MODIFIED_FILES: ${{ toJson(matrix.modified) }}
+          REMOVED_FILES: ${{ toJson(matrix.removed) }}
         run: |
           escape_markdown() {
             printf '%s' "$1" | sed -e 's/[][\\_*()~`>#+=|{}.!-]/\\&/g'
@@ -32,19 +35,54 @@ jobs:
             printf '%s' "$1" | sed -e 's/[\\)]/\\&/g'
           }
 
+          file_diff_url() {
+            local path="$1"
+            local anchor
+
+            # GitHub commit file anchors are sha256(path).
+            anchor="$(printf '%s' "$path" | sha256sum | cut -d ' ' -f 1)"
+            printf '%s#diff-%s' "$COMMIT_URL" "$anchor"
+          }
+
+          append_file_links() {
+            local label="$1"
+            local files_json="$2"
+            local links=""
+            local path file_url escaped_path escaped_file_url
+
+            while IFS= read -r path; do
+              [ -n "$path" ] || continue
+
+              file_url="$(file_diff_url "$path")"
+              escaped_path="$(escape_markdown "$path")"
+              escaped_file_url="$(escape_markdown_url "$file_url")"
+              links+=$'\n'"\\- [$escaped_path]($escaped_file_url)"
+            done < <(printf '%s' "$files_json" | jq -r '.[]?')
+
+            [ -z "$links" ] || FILE_LINKS+=$'\n\n'"*$label:*$links"
+          }
+
           SHORT_SHA="${COMMIT_SHA:0:7}"
           ESCAPED_SHORT_SHA="$(escape_markdown "$SHORT_SHA")"
           ESCAPED_URL="$(escape_markdown_url "$COMMIT_URL")"
           ESCAPED_PUSHER="$(escape_markdown "$PUSHER")"
           ESCAPED_AUTHOR="$(escape_markdown "$COMMIT_AUTHOR")"
           ESCAPED_MESSAGE="$(escape_markdown "$COMMIT_MESSAGE" | sed 's/^/> /')"
+          FILE_LINKS=""
+          append_file_links "Added" "$ADDED_FILES"
+          append_file_links "Modified" "$MODIFIED_FILES"
+          append_file_links "Removed" "$REMOVED_FILES"
 
-          printf -v TEXT '%s\n\n*Commit:* [%s](%s)\n*Pushed by:* %s\n*Author:* %s' \
+          FILE_SECTION=""
+          [ -z "$FILE_LINKS" ] || FILE_SECTION=$'\n\n'"*Changed files:*$FILE_LINKS"
+
+          printf -v TEXT '%s\n\n*Commit:* [%s](%s)\n*Pushed by:* %s\n*Author:* %s%s' \
             "$ESCAPED_MESSAGE" \
             "$ESCAPED_SHORT_SHA" \
             "$ESCAPED_URL" \
             "$ESCAPED_PUSHER" \
-            "$ESCAPED_AUTHOR"
+            "$ESCAPED_AUTHOR" \
+            "$FILE_SECTION"
 
           curl -X POST "https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage" \
             --data-urlencode "chat_id=$CHANNEL_ID" \
