@@ -41,6 +41,7 @@
           "tinygo-org/tools"
         ];
         brews = [
+          "anomalyco/tap/opencode"
           "cmake"
           "dfu-util"
           "esptool"
@@ -87,6 +88,7 @@
           "utm"
           "visual-studio-code"
           "whatsapp"
+          "zed"
           "zen"
         ];
       };
