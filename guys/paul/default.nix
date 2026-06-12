@@ -80,6 +80,7 @@
           "utm"
           "visual-studio-code"
           "vlc"
+          "zed"
           "zen"
         ];
       };
