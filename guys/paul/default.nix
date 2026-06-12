@@ -40,6 +40,7 @@
           "gotestsum"
           "poppler"
           "ollama"
+          "anomalyco/tap/opencode"
         ];
         casks = [
           "aerospace"
