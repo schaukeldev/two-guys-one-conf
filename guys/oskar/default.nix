@@ -49,6 +49,7 @@
         ];
         casks = [
           "android-platform-tools"
+          "android-studio"
           "audacity"
           "bambu-studio"
           "betterdisplay"
@@ -60,6 +61,7 @@
           "displaylink"
           "docker-desktop"
           "finicky"
+          "helium-browser"
           "heroic"
           "hoppscotch"
           "iina"

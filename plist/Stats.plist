@@ -83,11 +83,11 @@
 	<key>NSStatusItem Preferred Position CPU_mini</key>
 	<real>395</real>
 	<key>NSStatusItem Preferred Position Clock_sensors</key>
-	<real>105</real>
+	<real>128</real>
 	<key>NSStatusItem Preferred Position RAM_mini</key>
 	<real>358</real>
 	<key>NSStatusItem Preferred Position Sensors_sensors</key>
-	<real>326</real>
+	<real>323</real>
 	<key>NSStatusItem Restore Position Clock_label</key>
 	<integer>5368</integer>
 	<key>NSStatusItem Restore Position Disk_mini</key>
@@ -110,7 +110,7 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame eu.exelban.Stats.Settings.WindowFrame</key>
-	<string>667 391 728 480 0 0 2048 1122 </string>
+	<string>375 270 728 480 0 0 1470 923 </string>
 	<key>Network_state</key>
 	<false/>
 	<key>RAM_barChart_position</key>
@@ -186,7 +186,7 @@
 	<key>sensor_PPBR</key>
 	<false/>
 	<key>sensor_PSTR</key>
-	<false/>
+	<true/>
 	<key>sensor_TaLP</key>
 	<false/>
 	<key>sensor_Total System Consumption</key>
@@ -198,10 +198,10 @@
 	<key>telemetry</key>
 	<false/>
 	<key>updater_check_ts</key>
-	<integer>1780495463</integer>
+	<integer>1781618277</integer>
 	<key>updater_install_ts</key>
-	<integer>1780495470</integer>
+	<integer>1781618238</integer>
 	<key>version</key>
-	<string>2.12.16</string>
+	<string>3.0.3</string>
 </dict>
 </plist>
