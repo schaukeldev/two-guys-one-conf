@@ -24,7 +24,6 @@ jobs:
           COMMIT_MESSAGE: ${{ matrix.message }}
           COMMIT_SHA: ${{ matrix.id }}
           COMMIT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ matrix.id }}
-          COMMIT_AUTHOR: ${{ matrix.author.name }}
           PUSHER: ${{ github.event.pusher.name }}
           API_URL: ${{ github.api_url }}
           REPOSITORY: ${{ github.repository }}
@@ -75,7 +74,6 @@ jobs:
           ESCAPED_SHORT_SHA="$(escape_markdown "$SHORT_SHA")"
           ESCAPED_URL="$(escape_markdown_url "$COMMIT_URL")"
           ESCAPED_PUSHER="$(escape_markdown "$PUSHER")"
-          ESCAPED_AUTHOR="$(escape_markdown "$COMMIT_AUTHOR")"
           ESCAPED_MESSAGE="$(escape_markdown "$COMMIT_MESSAGE" | sed 's/^/> /')"
           COMMIT_DATA="$(curl -fsSL \
             -H "Accept: application/vnd.github+json" \
@@ -91,12 +89,11 @@ jobs:
           FILE_SECTION=""
           [ -z "$FILE_LINKS" ] || FILE_SECTION="$FILE_LINKS"
 
-          printf -v TEXT '%s\n\n*Commit:* [%s](%s)\n*Pushed by:* %s\n*Author:* %s%s' \
+          printf -v TEXT '%s\n\n*Commit:* [%s](%s)\n*Pushed by:* %s%s' \
             "$ESCAPED_MESSAGE" \
             "$ESCAPED_SHORT_SHA" \
             "$ESCAPED_URL" \
             "$ESCAPED_PUSHER" \
-            "$ESCAPED_AUTHOR" \
             "$FILE_SECTION"
 
           curl -X POST "https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage" \
