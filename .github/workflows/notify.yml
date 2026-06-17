@@ -89,7 +89,7 @@ jobs:
           append_file_links "Renamed" "$(commit_files_by_status "renamed")"
 
           FILE_SECTION=""
-          [ -z "$FILE_LINKS" ] || FILE_SECTION=$'\n\n'"*Changed files:*$FILE_LINKS"
+          [ -z "$FILE_LINKS" ] || FILE_SECTION="$FILE_LINKS"
 
           printf -v TEXT '%s\n\n*Commit:* [%s](%s)\n*Pushed by:* %s\n*Author:* %s%s' \
             "$ESCAPED_MESSAGE" \
