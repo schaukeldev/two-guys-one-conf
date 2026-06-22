@@ -29,7 +29,7 @@
     "/Applications/Microsoft Teams.app"
     "/Applications/Microsoft Outlook.app"
     "/Applications/Google Chrome.app"
-    "/Applications/Zen.app"
+    "/Applications/Brave Browser.app"
     "/Applications/Visual Studio Code.app"
     "/Applications/iTerm.app"
     "/Applications/Hoppscotch.app"
