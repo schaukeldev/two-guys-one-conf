@@ -62,7 +62,6 @@
           "displaylink"
           "docker-desktop"
           "finicky"
-          "helium-browser"
           "heroic"
           "hoppscotch"
           "iina"
