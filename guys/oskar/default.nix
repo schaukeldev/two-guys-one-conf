@@ -62,6 +62,7 @@
           "displaylink"
           "docker-desktop"
           "finicky"
+          "handy"
           "heroic"
           "hoppscotch"
           "iina"
