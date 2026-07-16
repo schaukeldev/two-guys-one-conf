@@ -15,8 +15,6 @@
     AppleAccentColor = 6;
   };
 
-  my.homebrew.casks = ["bruno"];
-
   system.defaults.dock.persistent-apps = [
     "/System/Applications/Messages.app"
     "/Applications/Spark Desktop.app"
@@ -32,7 +30,7 @@
     "/Applications/Brave Browser.app"
     "/Applications/Visual Studio Code.app"
     "/Applications/iTerm.app"
-    "/Applications/Hoppscotch.app"
+    "/Applications/Bruno.app"
     "/Applications/Obsidian.app"
     "/Applications/WhatsApp.app"
     "/Applications/Telegram Desktop.app"

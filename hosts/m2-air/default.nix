@@ -13,7 +13,7 @@
     "/Applications/Brave Browser.app"
     "/Applications/Visual Studio Code.app"
     "/Applications/iTerm.app"
-    "/Applications/Hoppscotch.app"
+    "/Applications/Bruno.app"
     "/Applications/Obsidian.app"
     "/Applications/WhatsApp.app"
     "/Applications/Telegram Desktop.app"
