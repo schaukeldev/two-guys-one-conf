@@ -11,7 +11,7 @@
     "/System/Applications/Home.app"
     "/System/Applications/System Settings.app"
     "/Applications/Brave Browser.app"
-    "/Applications/Zed.app"
+    "/Applications/Visual Studio Code.app"
     "/Applications/iTerm.app"
     "/Applications/Hoppscotch.app"
     "/Applications/Obsidian.app"
