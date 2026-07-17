@@ -107,9 +107,10 @@ in {
         else "/etc/nixos/dotfiles";
     };
 
-    fonts.packages = [
-      pkgs.nerd-fonts.fira-code
-      pkgs.nerd-fonts.jetbrains-mono
+    fonts.packages = with pkgs; [
+      nerd-fonts.fira-code
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.comic-shanns-mono
     ];
 
     environment.systemPackages = with pkgs; [
@@ -129,8 +130,6 @@ in {
       goreleaser
       gow
       lazydocker
-      nerd-fonts.fira-code
-      nerd-fonts.jetbrains-mono
       nixd
       nodejs_24
       pnpm
