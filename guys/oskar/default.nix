@@ -12,6 +12,10 @@
     users.${config.my.username}.services.syncthing.enable = true;
   };
 
+  environment.systemPackages = with pkgs; [
+    imagemagick
+  ];
+
   my =
     {
       git = {
