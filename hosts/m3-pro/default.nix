@@ -1,4 +1,4 @@
-{...}: {
+{config, ...}: {
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   my.username = "o";
@@ -32,7 +32,7 @@
     "/Applications/iTerm.app"
     "/Applications/Bruno.app"
     "/Applications/Obsidian.app"
-    "/Applications/WhatsApp.app"
+    "/Users/${config.my.username}/Applications/Brave Browser Apps.localized/WhatsApp Web.app"
     "/Applications/Telegram Desktop.app"
     "/Applications/Spotify.app"
     "/Applications/Xcode.app"

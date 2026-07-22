@@ -90,7 +90,6 @@
           "the-unarchiver"
           "utm"
           "visual-studio-code"
-          "whatsapp"
           "zed"
         ];
       };
