@@ -8,18 +8,15 @@
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
     # required for apple silicon computers
     apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
     apple-silicon.inputs.nixpkgs.follows = "nixpkgs";
+
     # paul desktop env inputs
     noctalia.url = "github:noctalia-dev/noctalia/legacy-v4";
     noctalia.inputs.nixpkgs.follows = "nixpkgs";
-   
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    # aquamarine.url = "github:cornedor/aquamarine/fix-render-node-fallback";
-
-    
-    #hyprland.inputs.aquamarine.follows = "aquamarine";
   };
 
   outputs = inputs @ {
@@ -28,8 +25,6 @@
     nix-darwin,
     nix-homebrew,
     nixpkgs,
-    apple-silicon,
-    noctalia,
     ...
   }: let
     mkDarwin = {
