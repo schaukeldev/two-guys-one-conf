@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Battery_barChart_position</key>
+	<integer>3</integer>
+	<key>Battery_batteryDetails_position</key>
+	<integer>4</integer>
+	<key>Battery_battery_position</key>
+	<integer>2</integer>
+	<key>Battery_label_position</key>
+	<integer>0</integer>
+	<key>Battery_mini_position</key>
+	<integer>1</integer>
+	<key>Battery_notifications_high</key>
+	<string></string>
+	<key>Battery_notifications_low</key>
+	<string>low</string>
+	<key>Battery_state</key>
+	<false/>
+	<key>Battery_widget</key>
+	<string></string>
+	<key>Bluetooth_state</key>
+	<false/>
+	<key>CPU_barChart_position</key>
+	<integer>3</integer>
+	<key>CPU_label_position</key>
+	<integer>1</integer>
+	<key>CPU_lineChart_position</key>
+	<integer>2</integer>
+	<key>CPU_mini_alignment</key>
+	<string>left</string>
+	<key>CPU_mini_label</key>
+	<true/>
+	<key>CPU_mini_position</key>
+	<integer>0</integer>
+	<key>CPU_pieChart_position</key>
+	<integer>4</integer>
+	<key>CPU_state</key>
+	<true/>
+	<key>CPU_tachometer_position</key>
+	<integer>5</integer>
+	<key>Clock_label_position</key>
+	<integer>1</integer>
+	<key>Clock_list</key>
+	<data>
+	W3sibmFtZSI6ImZvcnRuaXRlIHRpbWUiLCJmb3JtYXQiOiJFRUVFRUUgZC5NLnl5Iiwi
+	ZW5hYmxlZCI6dHJ1ZSwiaWQiOiIyOTI4MDEwOS1BNjdFLTQxN0QtQTk4NC01NjNEQzIy
+	QTFFQzMiLCJ0eiI6ImxvY2FsIn1d
+	</data>
+	<key>Clock_sensors_monospacedFont</key>
+	<false/>
+	<key>Clock_stack_position</key>
+	<integer>0</integer>
+	<key>Clock_state</key>
+	<true/>
+	<key>Clock_widget</key>
+	<string>sensors</string>
+	<key>Disk_state</key>
+	<false/>
+	<key>GPU_state</key>
+	<false/>
+	<key>LaunchAtLoginNext</key>
+	<true/>
+	<key>NSNavPanelExpandedSizeForSaveMode</key>
+	<string>{880, 448}</string>
+	<key>NSOSPLastRootDirectory</key>
+	<data>
+	Ym9va5ACAAAAAAUQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	AAAAAAAAAAAAAAAAAJQBAAAEAAAAAwMAAAAAACAHAAAAAQEAAHByaXZhdGUAAwAAAAEB
+	AABldGMACgAAAAEBAABuaXgtZGFyd2luAAAFAAAAAQEAAHBsaXN0AAAAEAAAAAEGAAAQ
+	AAAAIAAAACwAAABAAAAACAAAAAQDAABoRAAAAAAAAAgAAAAEAwAAaUQAAAAAAAAIAAAA
+	BAMAALC2BwAAAAAACAAAAAQDAAAiMA4AAAAAABAAAAABBgAAaAAAAHgAAACIAAAAmAAA
+	AAgAAAAABAAAQcfkQfpoKTkYAAAAAQIAAAIAAAAAAAAADwAAAAAAAAAAAAAAAAAAAAAA
+	AAABBQAACAAAAAEJAABmaWxlOi8vLwwAAAABAQAATWFjaW50b3NoIEhECAAAAAQDAAAA
+	kIKW5wAAAAgAAAAABAAAQcfR8v6AAAAkAAAAAQEAADEzQzUxRTIzLTIyMUUtNEEwMC04
+	QzJGLTM2Rjc1MTNGRTA3RBgAAAABAgAAgQAAAAEAAADvEwAAAQAAAAAAAAAAAAAAAQAA
+	AAEBAAAvAAAAtAAAAP7///8BAAAAAAAAAA4AAAAEEAAAUAAAAAAAAAAFEAAAqAAAAAAA
+	AAAQEAAA0AAAAAAAAABAEAAAwAAAAAAAAAACIAAAiAEAAAAAAAAFIAAA+AAAAAAAAAAQ
+	IAAACAEAAAAAAAARIAAAPAEAAAAAAAASIAAAHAEAAAAAAAATIAAALAEAAAAAAAAgIAAA
+	aAEAAAAAAAAwIAAA8AAAAAAAAAAB0AAA8AAAAAAAAAAQ0AAABAAAAAAAAAA=
+	</data>
+	<key>NSStatusItem Preferred Position CPU_mini</key>
+	<real>395</real>
+	<key>NSStatusItem Preferred Position Clock_sensors</key>
+	<real>128</real>
+	<key>NSStatusItem Preferred Position RAM_mini</key>
+	<real>358</real>
+	<key>NSStatusItem Preferred Position Sensors_sensors</key>
+	<real>323</real>
+	<key>NSStatusItem Restore Position Clock_label</key>
+	<integer>5368</integer>
+	<key>NSStatusItem Restore Position Disk_mini</key>
+	<integer>558</integer>
+	<key>NSStatusItem Restore Position Network_speed</key>
+	<integer>605</integer>
+	<key>NSStatusItem Restore Position Sensors_bar_chart</key>
+	<integer>15748</integer>
+	<key>NSStatusItem Restore Position Sensors_label</key>
+	<integer>5375</integer>
+	<key>NSToolbar Configuration eu.exelban.Stats.Settings.Toolbar</key>
+	<dict>
+		<key>TB Display Mode</key>
+		<integer>1</integer>
+		<key>TB Icon Size Mode</key>
+		<integer>1</integer>
+		<key>TB Is Shown</key>
+		<true/>
+		<key>TB Size Mode</key>
+		<integer>1</integer>
+	</dict>
+	<key>NSWindow Frame eu.exelban.Stats.Settings.WindowFrame</key>
+	<string>375 270 728 480 0 0 1470 923 </string>
+	<key>Network_state</key>
+	<false/>
+	<key>RAM_barChart_position</key>
+	<integer>5</integer>
+	<key>RAM_label_position</key>
+	<integer>2</integer>
+	<key>RAM_lineChart_position</key>
+	<integer>1</integer>
+	<key>RAM_memory_position</key>
+	<integer>7</integer>
+	<key>RAM_mini_position</key>
+	<integer>0</integer>
+	<key>RAM_pieChart_position</key>
+	<integer>6</integer>
+	<key>RAM_state</key>
+	<true/>
+	<key>RAM_state_position</key>
+	<integer>4</integer>
+	<key>RAM_tachometer_position</key>
+	<integer>8</integer>
+	<key>RAM_text_position</key>
+	<integer>3</integer>
+	<key>RAM_widget</key>
+	<string>mini</string>
+	<key>Sensors_barChart_position</key>
+	<integer>1</integer>
+	<key>Sensors_fanControl</key>
+	<true/>
+	<key>Sensors_fanValue</key>
+	<string>percentage</string>
+	<key>Sensors_fansSync</key>
+	<true/>
+	<key>Sensors_hid</key>
+	<false/>
+	<key>Sensors_label_position</key>
+	<integer>2</integer>
+	<key>Sensors_speed</key>
+	<false/>
+	<key>Sensors_stack_position</key>
+	<integer>0</integer>
+	<key>Sensors_state</key>
+	<true/>
+	<key>Sensors_turnOffFanAlert</key>
+	<true/>
+	<key>Sensors_widget</key>
+	<string>sensors</string>
+	<key>ble_40-ef-4c-df-73-5b</key>
+	<false/>
+	<key>fan_0_mode</key>
+	<integer>0</integer>
+	<key>fan_0_speed</key>
+	<integer>6800</integer>
+	<key>fan_1_mode</key>
+	<integer>0</integer>
+	<key>fan_1_speed</key>
+	<integer>6800</integer>
+	<key>remote_tokens_migrated_to_keychain</key>
+	<true/>
+	<key>runAtLoginInitialized</key>
+	<true/>
+	<key>sensor_Average CPU</key>
+	<true/>
+	<key>sensor_Average GPU</key>
+	<false/>
+	<key>sensor_Average System Total</key>
+	<false/>
+	<key>sensor_F0Ac</key>
+	<false/>
+	<key>sensor_Fastest Fan</key>
+	<true/>
+	<key>sensor_Fastest fan</key>
+	<true/>
+	<key>sensor_PPBR</key>
+	<false/>
+	<key>sensor_PSTR</key>
+	<true/>
+	<key>sensor_TaLP</key>
+	<false/>
+	<key>sensor_Total System Consumption</key>
+	<false/>
+	<key>setupProcess</key>
+	<true/>
+	<key>support_ts</key>
+	<integer>1779979541</integer>
+	<key>telemetry</key>
+	<false/>
+	<key>updater_check_ts</key>
+	<integer>1781618277</integer>
+	<key>updater_install_ts</key>
+	<integer>1781618238</integer>
+	<key>version</key>
+	<string>3.0.3</string>
+</dict>
+</plist>

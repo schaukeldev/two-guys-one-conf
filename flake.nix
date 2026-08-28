@@ -1,0 +1,121 @@
+{
+  description = "two-guys-one-conf";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    # required for apple silicon computers
+    apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
+    apple-silicon.inputs.nixpkgs.follows = "nixpkgs";
+    # paul desktop env inputs
+    noctalia.url = "github:noctalia-dev/noctalia/legacy-v4";
+    noctalia.inputs.nixpkgs.follows = "nixpkgs";
+   
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    # aquamarine.url = "github:cornedor/aquamarine/fix-render-node-fallback";
+
+    
+    #hyprland.inputs.aquamarine.follows = "aquamarine";
+  };
+
+  outputs = inputs @ {
+    self,
+    home-manager,
+    nix-darwin,
+    nix-homebrew,
+    nixpkgs,
+    apple-silicon,
+    noctalia,
+    ...
+  }: let
+    mkDarwin = {
+      system,
+      host,
+      guy,
+    }:
+      nix-darwin.lib.darwinSystem {
+        inherit system;
+        specialArgs = {inherit self host guy inputs;};
+        modules = [
+          ./modules/tuckr.nix
+          ./guys/${guy}/default.nix
+          ./modules/common.nix
+          ./modules/darwin.nix
+          nix-homebrew.darwinModules.nix-homebrew
+          home-manager.darwinModules.home-manager
+          ./modules/homebrew.nix
+          ./hosts/${host}/default.nix
+        ];
+      };
+
+    mkNixos = {
+      system,
+      host,
+      guy,
+    }:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {inherit self host guy inputs;};
+        modules = [
+          ./modules/tuckr.nix
+          ./guys/${guy}/default.nix
+          ./modules/common.nix
+          ./modules/nixos.nix
+          home-manager.nixosModules.home-manager
+          ./hosts/${host}/default.nix
+        ];
+      };
+  in {
+    darwinConfigurations = {
+      # sudo darwin-rebuild switch --flake ".#m2-air"
+      m2-air = mkDarwin {
+        system = "aarch64-darwin";
+        host = "m2-air";
+        guy = "oskar";
+      };
+      # sudo darwin-rebuild switch --flake ".#m2-air-p"
+      m2-air-p = mkDarwin {
+        system = "aarch64-darwin";
+        host = "m2-air-p";
+        guy = "paul";
+      };
+      # sudo darwin-rebuild switch --flake ".#m3-pro"
+      m3-pro = mkDarwin {
+        system = "aarch64-darwin";
+        host = "m3-pro";
+        guy = "oskar";
+      };
+      # sudo darwin-rebuild switch --flake ".#m4-pro"
+      m4-pro = mkDarwin {
+        system = "aarch64-darwin";
+        host = "m4-pro";
+        guy = "paul";
+      };
+    };
+
+    nixosConfigurations = {
+      # sudo nixos-rebuild switch --flake ".#lserver"
+      lserver = mkNixos {
+        system = "x86_64-linux";
+        host = "lserver";
+        guy = "oskar";
+      };
+      # sudo nixos-rebuild switch --flake ".#mini7"
+      mini7 = mkNixos {
+        system = "x86_64-linux";
+        host = "mini7";
+        guy = "paul";
+      };
+      # sudo nixos-rebuild switch --flake ".#m2-asahi"
+      m2-asahi = mkNixos {
+        system = "aarch64-linux";
+        host = "m2-asahi";
+        guy = "paul";
+      };
+    };
+  };
+}

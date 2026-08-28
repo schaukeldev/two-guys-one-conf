@@ -1,0 +1,40 @@
+alias r='sudo nixos-rebuild switch'
+alias u='cd /etc/nixos && git pull && r; cd -'
+
+alias publicip='curl -4 -s ifconfig.co'
+alias localip="ip -4 addr show scope global | grep inet | awk '{print $2}' | cut -d'/' -f1"
+
+# --------------------------------------------------------------------------------------
+# functions
+
+brightness() {
+	maxBrightness=$(cat /sys/class/backlight/intel_backlight/max_brightness)
+	newBrightness=$(($1 * $maxBrightness / 100))
+	sudo sh -c "echo $newBrightness > /sys/class/backlight/intel_backlight/brightness"
+}
+
+whatport() {
+	sudo ss -lptn | grep ":$1 "
+}
+
+scannet() {
+  emulate -L zsh
+  autoload -Uz colors && colors
+
+  local MAG="$fg[magenta]" CYN="$fg[cyan]" YLW="$fg[yellow]" GRY="$fg[black]" RST="$reset_color"
+  [[ -t 1 ]] || { MAG=""; CYN=""; YLW=""; GRY=""; RST=""; }
+
+  ip -br -4 addr show 2>/dev/null | awk '/ brd /{print}'
+
+  ip -4 neigh show 2>/dev/null \
+    | awk '/lladdr/ {print $1, $3, $5}' \
+    | while read -r ip iface mac; do
+				local host="$(getent hosts "$ip" 2>/dev/null | awk 'NR==1{print $2}')"
+				[[ -n "$host" ]] || host="-"
+				printf "%s%-15s%s  %s%-28.28s%s  %s%-15.15s%s  %s%s%s\n" \
+					"$MAG" "$ip" "$RST" \
+					"$GRY" "$host" "$RST" \
+					"$CYN" "$iface" "$RST" \
+					"$YLW" "$mac" "$RST"
+      done
+}

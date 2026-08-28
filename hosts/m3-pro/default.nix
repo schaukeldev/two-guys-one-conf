@@ -1,0 +1,44 @@
+{...}: {
+  nixpkgs.hostPlatform = "aarch64-darwin";
+
+  my.username = "o";
+
+  networking = {
+    hostName = "LMDT001849997";
+    computerName = "LMDT001849997";
+    localHostName = "LMDT001849997";
+  };
+
+  system.defaults.CustomUserPreferences."NSGlobalDomain" = {
+    NSColorSimulateHardwareAccent = null;
+    NSColorSimulatedHardwareEnclosureNumber = null;
+    AppleAccentColor = 6;
+  };
+
+  my.homebrew.casks = ["bruno"];
+
+  system.defaults.dock.persistent-apps = [
+    "/System/Applications/Messages.app"
+    "/Applications/Spark Desktop.app"
+    "/System/Applications/Photos.app"
+    "/System/Applications/Notes.app"
+    "/System/Applications/FaceTime.app"
+    "/System/Applications/Reminders.app"
+    "/System/Applications/Home.app"
+    "/System/Applications/System Settings.app"
+    "/Applications/Microsoft Teams.app"
+    "/Applications/Microsoft Outlook.app"
+    "/Applications/Google Chrome.app"
+    "/Applications/Brave Browser.app"
+    "/Applications/Zed.app"
+    "/Applications/iTerm.app"
+    "/Applications/Hoppscotch.app"
+    "/Applications/Obsidian.app"
+    "/Applications/WhatsApp.app"
+    "/Applications/Telegram Desktop.app"
+    "/Applications/Spotify.app"
+    "/Applications/Xcode.app"
+    "/Applications/UTM.app"
+    "/Applications/BambuStudio.app"
+  ];
+}
