@@ -25,6 +25,7 @@
     nix-darwin,
     nix-homebrew,
     nixpkgs,
+    ...
   }: let
     mkDarwin = {
       system,

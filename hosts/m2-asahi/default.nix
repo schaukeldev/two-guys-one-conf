@@ -52,6 +52,7 @@ programs.hyprland = {
 
   my.username = "paul";
   networking.hostName = "m2-asahi";
+  hardware.asahi.enable = true;
 
   environment.systemPackages = with pkgs; [
     wget
