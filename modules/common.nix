@@ -106,7 +106,7 @@ in {
         then "/etc/nix-darwin/dotfiles"
         else "/etc/nixos/dotfiles";
     };
-
+    
     fonts.packages = with pkgs; [
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
