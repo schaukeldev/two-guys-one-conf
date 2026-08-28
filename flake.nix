@@ -12,11 +12,11 @@
     # required for apple silicon computers
     apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
     apple-silicon.inputs.nixpkgs.follows = "nixpkgs";
+
     # paul desktop env inputs
     noctalia.url = "github:noctalia-dev/noctalia/legacy-v4";
-    noctalia.inputs.nixpkgs.follows = "nixpkgs";   
+    noctalia.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-
   };
 
   outputs = inputs @ {
