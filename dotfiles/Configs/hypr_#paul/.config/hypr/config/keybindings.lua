@@ -3,10 +3,12 @@ local hyperShift   = hyper .. " + SHIFT"
 local workspaceMod = "SUPER"
 
 local terminal    = "alacritty"
+local browser     = "zen-beta"
 local fileManager = "thunar"
 local menu        = "hyprlauncher"
 
 hl.bind(workspaceMod .. " + Return", hl.dsp.exec_cmd(terminal))
+hl.bind(workspaceMod .. " + adiaeresis", hl.dsp.exec_cmd(browser))
 hl.bind(hyper .. " + Q",      hl.dsp.window.close())
 hl.bind(hyper .. " + E",      hl.dsp.exec_cmd(fileManager))
 hl.bind(hyper .. " + V",      hl.dsp.window.float({ action = "toggle" }))
