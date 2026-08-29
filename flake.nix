@@ -14,9 +14,9 @@
     apple-silicon.inputs.nixpkgs.follows = "nixpkgs";
 
     # paul desktop env inputs
-    noctalia.url = "github:noctalia-dev/noctalia/legacy-v4";
+    noctalia.url = "github:noctalia-dev/noctalia";
     noctalia.inputs.nixpkgs.follows = "nixpkgs";
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = inputs @ {
