@@ -20,6 +20,7 @@ in {
   };
 
   security.polkit.enable = true;
+  environment.sessionVariables.TERMINAL = "alacritty";
 
   environment.systemPackages = with pkgs; [
     alacritty
