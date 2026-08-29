@@ -23,6 +23,15 @@
       profiles.default = {
         name = "Default Profile";
         path = "ijjbl3fy.Default Profile";
+        extensionButtons."nav-bar" = [
+          "{446900e4-71c2-419f-a6a7-df9c091e268b}"
+          "uBlock0@raymondhill.net"
+        ];
+        settings = {
+          "zen.view.compact.enable-at-startup" = true;
+          "zen.view.compact.hide-tabbar" = false;
+          "zen.view.compact.hide-toolbar" = false;
+        };
         search = {
           force = true;
           engines.kleinanzeigen = {
