@@ -2,6 +2,7 @@ local ipc = "noctalia msg "
 local hyper = "CTRL + ALT + SUPER"
 
 hl.bind("SUPER + SPACE", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
+hl.bind("SUPER + SHIFT + V", hl.dsp.exec_cmd(ipc .. "panel-toggle clipboard"))
 hl.bind(hyper .. " + C",     hl.dsp.exec_cmd(ipc .. "panel-toggle control-center"))
 hl.bind(hyper .. " + comma", hl.dsp.exec_cmd(ipc .. "settings-toggle"))
 hl.bind("ALT + Tab",     hl.dsp.exec_cmd(ipc .. "window-switcher"))
