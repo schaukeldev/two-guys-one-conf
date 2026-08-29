@@ -10,6 +10,7 @@
     ./hardware-configuration.nix
     ./keyboard.nix
     ./tor-browser.nix
+    ./zen-browser.nix
     inputs.apple-silicon.nixosModules.apple-silicon-support
   ];
 

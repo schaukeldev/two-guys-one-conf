@@ -25,6 +25,8 @@ in {
     package = pkgs-hyprland.mesa;
   };
 
+  services.upower.enable = true;
+  services.power-profiles-daemon.enable = true;
   security.polkit.enable = true;
   environment.sessionVariables = {
     TERMINAL = "alacritty";
