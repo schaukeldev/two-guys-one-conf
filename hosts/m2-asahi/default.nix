@@ -13,6 +13,7 @@ in
 {
   imports = [
     ./hardware-configuration.nix
+    ./keyboard.nix
     ./tor-browser.nix
     inputs.apple-silicon.nixosModules.apple-silicon-support
   ];

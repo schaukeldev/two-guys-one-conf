@@ -6,3 +6,6 @@ require("config.input")
 require("config.keybindings")
 require("config.noctalia")
 require("config.rules")
+
+-- For Noctalia Color templates
+require("noctalia").apply_theme()
