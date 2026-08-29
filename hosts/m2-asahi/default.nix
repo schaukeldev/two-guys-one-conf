@@ -55,22 +55,23 @@ programs.hyprland = {
   hardware.asahi.enable = true;
 
   environment.systemPackages = with pkgs; [
-    wget
-    displaylink
-    vscode
     alacritty
+    asahi-audio
+    bambu-studio
+    bibata-cursors
+    brightnessctl
+    displaylink
     git
+    hyprcursor
+    hyprpolkitagent
     inputs.noctalia.packages.${system}.default
     mesa
-    hyprpolkitagent
-    asahi-audio
-    zed-editor
-    python3
-    hyprcursor
-    bibata-cursors
-    bambu-studio
-    telegram-desktop
     mullvad-vpn
+    opencode
+    python3
+    telegram-desktop
+    vscode
+    wget
   ];
 
   security.polkit.enable = true;
