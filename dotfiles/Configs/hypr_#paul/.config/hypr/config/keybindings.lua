@@ -6,7 +6,7 @@ local terminal    = "alacritty"
 local fileManager = "thunar"
 local menu        = "hyprlauncher"
 
-hl.bind(hyper .. " + Return", hl.dsp.exec_cmd(terminal))
+hl.bind(workspaceMod .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(hyper .. " + Q",      hl.dsp.window.close())
 hl.bind(hyper .. " + E",      hl.dsp.exec_cmd(fileManager))
 hl.bind(hyper .. " + V",      hl.dsp.window.float({ action = "toggle" }))
