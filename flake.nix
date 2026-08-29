@@ -16,6 +16,8 @@
     # paul desktop env inputs
     noctalia.url = "github:noctalia-dev/noctalia";
     noctalia.inputs.nixpkgs.follows = "nixpkgs";
+    noctalia-greeter.url = "github:noctalia-dev/noctalia-greeter";
+    noctalia-greeter.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.url = "github:hyprwm/Hyprland";
   };
 

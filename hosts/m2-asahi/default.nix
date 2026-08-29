@@ -21,6 +21,7 @@
   networking.networkmanager.wifi.backend = "iwd";
 
   services.mullvad-vpn.enable = true;
+  services.gnome.gnome-keyring.enable = true;
   programs.firefox.enable = true;
 
   my.username = "paul";
