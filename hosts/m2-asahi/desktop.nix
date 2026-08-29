@@ -24,6 +24,7 @@ in {
     enable = true;
     package = pkgs-hyprland.mesa;
   };
+  hardware.bluetooth.enable = true;
 
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;
