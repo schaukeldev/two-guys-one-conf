@@ -43,10 +43,6 @@ programs.hyprland = {
 
   services.displayManager.gdm.enable = true;
   services.mullvad-vpn.enable = true;
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
 
   programs.firefox.enable = true;
 
