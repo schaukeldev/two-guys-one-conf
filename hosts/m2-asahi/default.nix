@@ -9,12 +9,12 @@
     ./displaylink.nix
     ./hardware-configuration.nix
     ./keyboard.nix
-    ./tor-browser.nix
     ./zen-browser.nix
     inputs.apple-silicon.nixosModules.apple-silicon-support
   ];
 
   boot.loader.systemd-boot.enable = lib.mkForce true;
+  boot.loader.systemd-boot.configurationLimit = 7;
   boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
   boot.kernelParams = ["appledrm.show_notch=1"];
   hardware.asahi.enable = true;
@@ -24,23 +24,28 @@
   services.mullvad-vpn.enable = true;
   services.gnome.gnome-keyring.enable = true;
   programs.firefox.enable = true;
+ 
 
+  nix.settings.cores = 4;
+  
   my.username = "paul";
   networking.hostName = "m2-asahi";
 
   environment.systemPackages = with pkgs; [
     asahi-audio
-    bambu-studio
+    # doesnt build anymore :(
+    # bambu-studio
     git
     mullvad-vpn
     opencode
     python3
     go-task
+    google-chrome
     telegram-desktop
     vesktop
     vscode
     wget
   ];
 
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.11";
 }
