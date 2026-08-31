@@ -35,6 +35,7 @@
     mullvad-vpn
     opencode
     python3
+    go-task
     telegram-desktop
     vesktop
     vscode

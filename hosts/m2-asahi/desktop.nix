@@ -44,11 +44,27 @@ in {
 
   environment.systemPackages = with pkgs; [
     alacritty
+    bc
     bibata-cursors
     brightnessctl
+    gimp
+    grim
     hyprcursor
+    hyprpicker
     hyprpolkitagent
+    imagemagick
     inputs.noctalia.packages.${system}.default
+    jq
     mesa
+    mpv
+    niri
+    satty
+    slurp
+    swappy
+    (tesseract.override {enableLanguages = ["eng" "deu"];})
+    translate-shell
+    wf-recorder
+    wl-screenrec
+    zbar
   ];
 }
