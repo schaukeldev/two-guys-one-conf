@@ -21,6 +21,9 @@
 
         #m2-air
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAANYKheY8aMzH8VDM2TbInbXgnAKU71TncoAFor0vwE paul@oellers.net"
+
+        #m2-air-asahi
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM6wn+iWK/JyFd6t5RICT2G7jPF5WnknGBcK5JKXYvUT paul@oellers.net"
       ];
     }
 
@@ -28,7 +31,7 @@
       homebrew = {
         taps = [
           "mhaeuser/mhaeuser" # battery toolkit
-          "nikitabobko/aerospace" # aerospace app
+          "nikitabobko/tap" # aerospace app
           "tinygo-org/tools"
         ];
         brews = [
@@ -43,15 +46,15 @@
           "anomalyco/tap/opencode"
         ];
         casks = [
-          "aerospace"
+          "nikitabobko/tap/aerospace"
           "android-platform-tools"
           "audacity"
-          "anaconda"
           "bambu-studio"
           "basictex"
           "battery-toolkit"
           "betterdisplay"
           "blender"
+          "bruno"
           "codex"
           "codex-app"
           "dbeaver-community"
@@ -60,7 +63,6 @@
           "docker-desktop"
           "finicky"
           "google-chrome"
-          "hoppscotch"
           "iterm2"
           "jordanbaird-ice@beta"
           "keepingyouawake"
@@ -69,6 +71,7 @@
           "miniconda"
           "obs"
           "obsidian"
+          "openlogi"
           "prismlauncher"
           "raspberry-pi-imager"
           "raycast"
