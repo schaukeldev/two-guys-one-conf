@@ -64,7 +64,7 @@ in {
   services.gnome.gnome-keyring.enable = true;
   programs.firefox.enable = true;
  
-  nix.settings.cores = 4;
+  nix.settings.cores = 8;
   
   my.username = "paul";
   networking.hostName = "m2-asahi";
