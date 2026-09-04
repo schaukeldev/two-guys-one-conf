@@ -9,6 +9,7 @@
     ./displaylink.nix
     ./hardware-configuration.nix
     ./keyboard.nix
+    ./tor-browser.nix
     ./zen-browser.nix
     inputs.apple-silicon.nixosModules.apple-silicon-support
   ];
@@ -40,8 +41,10 @@
     opencode
     python3
     go-task
-    google-chrome
+    ungoogled-chromium
     telegram-desktop
+    texlive.combined.scheme-medium
+    texlivePackages.latexmk
     vesktop
     vscode
     wget
