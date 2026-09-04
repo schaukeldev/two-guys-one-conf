@@ -89,6 +89,17 @@ in {
             pull.rebase = true;
             rebase.autoStash = true;
             init.defaultBranch = "main";
+            # Investigate Further this fixed gh auth login issue on m2-asahi check if it breaks on darwin or other computers
+            credential = {
+              "https://github.com".helper = [
+                ""
+                "${pkgs.gh}/bin/gh auth git-credential"
+              ];
+              "https://gist.github.com".helper = [
+                ""
+                "${pkgs.gh}/bin/gh auth git-credential"
+              ];
+            };
           };
         };
       };
@@ -141,7 +152,6 @@ in {
       unzip
       wget
       zip
-
       ytDlpAuto
       ni # nodePackages."@antfu/ni"
     ];

@@ -8,6 +8,20 @@
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+    zen-browser.inputs.home-manager.follows = "home-manager";
+
+    # required for apple silicon computers
+    apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
+    apple-silicon.inputs.nixpkgs.follows = "nixpkgs";
+
+    # paul desktop env inputs
+    noctalia.url = "github:noctalia-dev/noctalia";
+    noctalia.inputs.nixpkgs.follows = "nixpkgs";
+    noctalia-greeter.url = "github:noctalia-dev/noctalia-greeter";
+    noctalia-greeter.inputs.nixpkgs.follows = "nixpkgs";
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = inputs @ {
@@ -16,6 +30,7 @@
     nix-darwin,
     nix-homebrew,
     nixpkgs,
+    ...
   }: let
     mkDarwin = {
       system,
@@ -93,6 +108,12 @@
       mini7 = mkNixos {
         system = "x86_64-linux";
         host = "mini7";
+        guy = "paul";
+      };
+      # sudo nixos-rebuild switch --flake ".#m2-asahi"
+      m2-asahi = mkNixos {
+        system = "aarch64-linux";
+        host = "m2-asahi";
         guy = "paul";
       };
     };
