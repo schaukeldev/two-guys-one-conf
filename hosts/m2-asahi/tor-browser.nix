@@ -6,7 +6,7 @@
       tor-browser-nightly = prev.tor-browser.overrideAttrs (
         finalAttrs: previousAttrs: {
           pname = "tor-browser-nightly";
-          version = "2026.08.20";
+          version = "2026.08.31";
 
           src = prev.fetchurl {
             url =
@@ -14,7 +14,7 @@
               + "tbb-nightly.${finalAttrs.version}/nightly-linux-aarch64/"
               + "tor-browser-linux-aarch64-tbb-nightly.${finalAttrs.version}.tar.xz";
 
-            hash = "sha256-LjMb6fMFxqkdEdzjCC2sCKpglSF/A9/PlUR5nkFXZfc=";
+            hash = "sha256-1JQLanqyw57RKDJpbf3brfMMnOIBfuV+vWiO5KmV0VU=";
           };
 
           meta = previousAttrs.meta // {
