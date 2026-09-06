@@ -2,6 +2,9 @@
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   my.username = "o";
+  my.homebrew.casks = [
+  	"lm-studio"
+  ];
 
   networking = {
     hostName = "LMDT001849997";
