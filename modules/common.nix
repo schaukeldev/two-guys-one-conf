@@ -68,7 +68,7 @@ in {
     my.username = lib.mkDefault "o";
 
     nix = {
-      settings.experimental-features = "nix-command flakes";
+      settings.experimental-features = [ "nix-command" "flakes" ];
       nixPath = ["nixpkgs=${inputs.nixpkgs}"];
     };
 

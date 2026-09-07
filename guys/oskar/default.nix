@@ -81,6 +81,7 @@
           "obsidian"
           "onyx"
           "opencode-desktop"
+          # "openscad@snapshot"
           "prismlauncher"
           "raspberry-pi-imager"
           "raycast"
