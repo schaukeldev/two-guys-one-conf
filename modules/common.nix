@@ -139,6 +139,7 @@ in {
       tree
       tuckr
       unzip
+      uv
       wget
       zip
 
