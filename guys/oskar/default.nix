@@ -95,6 +95,7 @@
           "the-unarchiver"
           "utm"
           "visual-studio-code"
+          "vorssaint"
           "zed"
         ];
       };
