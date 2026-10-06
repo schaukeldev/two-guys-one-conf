@@ -49,6 +49,7 @@
           "cmake"
           "dfu-util"
           "esptool"
+          "mole"
           "opensc"
         ];
         casks = [
