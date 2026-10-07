@@ -3,7 +3,7 @@
 
   my.username = "o";
   my.homebrew.casks = [
-  	"lm-studio"
+    "lm-studio"
   ];
 
   networking = {
@@ -37,7 +37,7 @@
     "/Applications/Obsidian.app"
     "/Users/${config.my.username}/Applications/Brave Browser Apps.localized/WhatsApp Web.app"
     "/Applications/Telegram Desktop.app"
-    "/Applications/Spotify.app"
+    "/System/Applications/Music.app"
     "/Applications/Xcode.app"
     "/Applications/UTM.app"
     "/Applications/BambuStudio.app"
