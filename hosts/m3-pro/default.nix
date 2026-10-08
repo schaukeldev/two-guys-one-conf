@@ -2,14 +2,25 @@
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   my.username = "o";
-  my.homebrew.casks = [
-    "lm-studio"
-  ];
 
   networking = {
     hostName = "LMDT001849997";
     computerName = "LMDT001849997";
     localHostName = "LMDT001849997";
+  };
+
+  my.homebrew.casks = [
+    "lm-studio"
+  ];
+
+  my.homebrew.masApps = {
+    MicrosoftExcel = 462058435;
+    MicrosoftOneNote = 784801555;
+    MicrosoftOutlook = 985367838;
+    MicrosoftPowerPoint = 462062816;
+    MicrosoftWord = 462054704;
+    OneDrive = 823766827;
+    UniversalPrint = 6450432292;
   };
 
   system.defaults.CustomUserPreferences."NSGlobalDomain" = {

@@ -9,6 +9,16 @@
     localHostName = "LMDT0024f8a63";
   };
 
+  my.homebrew.masApps = {
+    MicrosoftExcel = 462058435;
+    MicrosoftOneNote = 784801555;
+    MicrosoftOutlook = 985367838;
+    MicrosoftPowerPoint = 462062816;
+    MicrosoftWord = 462054704;
+    OneDrive = 823766827;
+    UniversalPrint = 6450432292;
+  };
+
   system.defaults.CustomUserPreferences."NSGlobalDomain" = {
     NSColorSimulateHardwareAccent = null;
     NSColorSimulatedHardwareEnclosureNumber = null;
