@@ -1,6 +1,6 @@
 {
   lib,
-  pkgs,
+  isDarwin,
   ...
 }: {
   environment.variables = {
@@ -26,8 +26,7 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM6wn+iWK/JyFd6t5RICT2G7jPF5WnknGBcK5JKXYvUT paul@oellers.net"
       ];
     }
-
-    // lib.optionalAttrs (pkgs.stdenv.hostPlatform.isDarwin) {
+    // lib.optionalAttrs isDarwin {
       homebrew = {
         taps = [
           "mhaeuser/mhaeuser" # battery toolkit

@@ -3,9 +3,9 @@
   lib,
   config,
   inputs,
+  isDarwin,
   ...
 }: let
-  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
   userHome =
     if isDarwin
     then "/Users/${config.my.username}"
@@ -68,7 +68,7 @@ in {
     my.username = lib.mkDefault "o";
 
     nix = {
-      settings.experimental-features = [ "nix-command" "flakes" ];
+      settings.experimental-features = ["nix-command" "flakes"];
       nixPath = ["nixpkgs=${inputs.nixpkgs}"];
     };
 

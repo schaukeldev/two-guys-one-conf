@@ -2,27 +2,16 @@
   lib,
   pkgs,
   config,
+  isDarwin,
   ...
-}: {
+}:
+{
   environment.variables = {
     TUCKR_CUSTOM_TARGETS = "oskar";
   };
 
-  home-manager = lib.optionalAttrs (pkgs.stdenv.hostPlatform.isDarwin) {
+  home-manager = lib.optionalAttrs isDarwin {
     users.${config.my.username}.services.syncthing.enable = true;
-  };
-
-  launchd = lib.optionalAttrs (pkgs.stdenv.hostPlatform.isDarwin) {
-    user.agents.opencode.serviceConfig = {
-      ProgramArguments = [
-        "${config.homebrew.prefix}/bin/opencode"
-        "service"
-        "start"
-      ];
-      RunAtLoad = true;
-      StandardOutPath = "/Users/${config.my.username}/Library/Logs/opencode-launchagent.out.log";
-      StandardErrorPath = "/Users/${config.my.username}/Library/Logs/opencode-launchagent.err.log";
-    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -50,7 +39,7 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN1Z1+udAEvwovjH5/0Mqzrg/iC10+A9KMl2rssjglLB"
       ];
     }
-    // lib.optionalAttrs (pkgs.stdenv.hostPlatform.isDarwin) {
+    // lib.optionalAttrs isDarwin {
       homebrew = {
         taps = [
           "mhaeuser/mhaeuser" # battery toolkit
@@ -114,4 +103,16 @@
         ];
       };
     };
+}
+// lib.optionalAttrs isDarwin {
+  launchd.user.agents.opencode.serviceConfig = {
+    ProgramArguments = [
+      "${config.homebrew.prefix}/bin/opencode"
+      "service"
+      "start"
+    ];
+    RunAtLoad = true;
+    StandardOutPath = "/Users/${config.my.username}/Library/Logs/opencode-launchagent.out.log";
+    StandardErrorPath = "/Users/${config.my.username}/Library/Logs/opencode-launchagent.err.log";
+  };
 }

@@ -24,7 +24,10 @@
     }:
       nix-darwin.lib.darwinSystem {
         inherit system;
-        specialArgs = {inherit self host guy inputs;};
+        specialArgs = {
+          inherit self host guy inputs;
+          isDarwin = true;
+        };
         modules = [
           ./modules/tuckr.nix
           ./guys/${guy}/default.nix
@@ -44,7 +47,10 @@
     }:
       nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit self host guy inputs;};
+        specialArgs = {
+          inherit self host guy inputs;
+          isDarwin = false;
+        };
         modules = [
           ./modules/tuckr.nix
           ./guys/${guy}/default.nix
