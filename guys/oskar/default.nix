@@ -12,6 +12,19 @@
     users.${config.my.username}.services.syncthing.enable = true;
   };
 
+  launchd = lib.optionalAttrs (pkgs.stdenv.hostPlatform.isDarwin) {
+    user.agents.opencode.serviceConfig = {
+      ProgramArguments = [
+        "${config.homebrew.prefix}/bin/opencode"
+        "service"
+        "start"
+      ];
+      RunAtLoad = true;
+      StandardOutPath = "/Users/${config.my.username}/Library/Logs/opencode-launchagent.out.log";
+      StandardErrorPath = "/Users/${config.my.username}/Library/Logs/opencode-launchagent.err.log";
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     imagemagick
   ];
@@ -45,7 +58,7 @@
           "tinygo-org/tools"
         ];
         brews = [
-          "anomalyco/tap/opencode"
+          "anomalyco/tap/opencode-v2"
           "cmake"
           "dfu-util"
           "esptool"
@@ -88,6 +101,7 @@
           "raycast"
           "readdle-spark"
           "rectangle-pro"
+          "saffsanity/sill/sill"
           "spotify"
           "stats"
           "steam"
