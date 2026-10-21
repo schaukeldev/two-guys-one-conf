@@ -10,6 +10,11 @@
 in {
   users.users.${config.my.username}.home = userHome;
   security.pam.services.sudo_local.touchIdAuth = true;
+  security.pam.services.sudo_local.reattach = true; # needed inside tmux (z4h starts one)
+  # allow touch id for sudo while DisplayLink (screen capture) is active
+  system.activationScripts.postActivation.text = ''
+    defaults write /Library/Preferences/com.apple.security.authorization ignoreArd -bool true
+  '';
 
   launchd.user.agents.set-wallpaper = {
     serviceConfig = {
