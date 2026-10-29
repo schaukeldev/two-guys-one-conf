@@ -9,10 +9,6 @@
     localHostName = "LMDT001849997";
   };
 
-  my.homebrew.casks = [
-    "lm-studio"
-  ];
-
   my.homebrew.masApps = {
     MicrosoftExcel = 462058435;
     MicrosoftOneNote = 784801555;
