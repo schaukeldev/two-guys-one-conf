@@ -41,7 +41,7 @@ export default {
 		},
 		{
 			match: (url) => {
-				return anyHostEndsWith(url, ["devops.telekom.de"]);
+				return anyHostEndsWith(url, ["gitlab.devops.telekom.de"]);
 			},
 			browser: DEFAULT_BROWSER,
 		},
