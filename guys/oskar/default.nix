@@ -42,8 +42,6 @@
     // lib.optionalAttrs isDarwin {
       homebrew = {
         taps = [
-          "mhaeuser/mhaeuser" # battery toolkit
-          "xykong/tap" # flux-markdown
           "tinygo-org/tools"
         ];
         brews = [
