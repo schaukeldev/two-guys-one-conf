@@ -49,10 +49,10 @@
         brews = [
           "anomalyco/tap/opencode-v2"
           "cmake"
-          "dfu-util"
-          "esptool"
-          "mole"
-          "opensc"
+          "dfu-util" # USB programmer
+          "esptool" # ESP8266 and ESP32 serial bootloader utility
+          "mole" # Mac cleaner
+          "opensc" # Tools and libraries for smart cards
         ];
         casks = [
           "android-platform-tools"
@@ -64,6 +64,8 @@
           "blender"
           "brave-browser"
           "bruno"
+          "claude"
+          "claude-code"
           "connectmenow"
           "dbeaver-community"
           "discord"
@@ -71,19 +73,15 @@
           "docker-desktop"
           "finicky"
           "handy"
-          "heroic"
           "iina"
           "iterm2"
-          "keepingyouawake"
-          "keyboardcleantool"
           "linearmouse"
+          "macpacker"
           "mullvad-vpn"
           "naps2"
           "obs"
           "obsidian"
-          "onyx"
           "opencode-desktop"
-          # "openscad@snapshot"
           "prismlauncher"
           "raspberry-pi-imager"
           "raycast"
@@ -95,7 +93,6 @@
           "steam"
           "telegram-desktop"
           "thaw@beta"
-          "the-unarchiver"
           "utm"
           "visual-studio-code"
           "vorssaint"
