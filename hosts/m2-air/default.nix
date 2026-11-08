@@ -17,7 +17,7 @@
     "/Applications/Obsidian.app"
     "/Users/${config.my.username}/Applications/Brave Browser Apps.localized/WhatsApp Web.app"
     "/Applications/Telegram Desktop.app"
-    "/System/Applications/Music.app"
+    "/Applications/Spotify.app"
     "/Applications/Xcode.app"
     "/Applications/UTM.app"
     "/Applications/BambuStudio.app"
