@@ -5,7 +5,8 @@
 #   so the per-user services below come back after a reboot / power failure
 # - system settings > general > sharing: enable screen sharing (needed for novnc too)
 # - grant rustdesk screen recording + accessibility, enable "start on login" in docker desktop
-# - xcodes install --latest && xcodes runtimes install "iOS <version>"
+# - xcodes install --latest && xcodes runtimes install "iOS <version>" (needs an apple id login,
+#   or download the .xip elsewhere and use xcodes install --path <file>.xip)
 # - gitlab-runner register --executor shell (writes ~/.gitlab-runner/config.toml, not in repo)
 {
   config,
@@ -55,6 +56,9 @@ in {
       ];
     };
   };
+
+  # no app store sign-in on this box, xcode comes from xcodes instead
+  homebrew.masApps = lib.mkForce {};
 
   # - power ------------------------------------------------------------------------------
 
