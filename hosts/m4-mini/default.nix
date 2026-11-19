@@ -12,6 +12,7 @@
 # - gitlab-runner register --executor shell (writes ~/.gitlab-runner/config.toml, not in repo)
 {
   config,
+  host,
   lib,
   pkgs,
   ...
@@ -32,6 +33,27 @@
     "/usr/sbin"
     "/sbin"
   ];
+
+  # creates a self-signed cert on first start. without --ssl-only, websockify detects tls
+  # per connection, so the same port still answers plain http
+  # no spaces: the novnc launcher passes the cert path to websockify unquoted
+  novncCertDir = "${userHome}/.local/share/novnc";
+  novncWithCert = pkgs.writeShellScript "novnc-with-cert" ''
+    set -euo pipefail
+
+    cert="${novncCertDir}/cert.pem"
+    key="${novncCertDir}/key.pem"
+
+    if [ ! -s "$cert" ] || [ ! -s "$key" ]; then
+      mkdir -p "${novncCertDir}"
+      ${pkgs.openssl}/bin/openssl req -x509 -newkey rsa:2048 -nodes -days 3650 \
+        -keyout "$key" -out "$cert" -subj "/CN=${host}" \
+        -addext "subjectAltName=DNS:${host},DNS:${host}.local,DNS:localhost,IP:127.0.0.1"
+      chmod 600 "$key"
+    fi
+
+    exec ${pkgs.novnc}/bin/novnc --listen 6080 --vnc localhost:5900 --cert "$cert" --key "$key"
+  '';
 in {
   nixpkgs.hostPlatform = "aarch64-darwin";
 
@@ -105,16 +127,13 @@ in {
 
   services.openssh.enable = true;
 
-  # browser remote desktop on http://<host>:6080/vnc.html, proxies macos screen sharing.
-  # plain http: keep it on the lan / behind a vpn
+  # browser remote desktop, proxies macos screen sharing. port 6080 serves both:
+  # - https://<host>:6080/vnc.html with a self-signed cert (accept the warning once)
+  # - http://<host>:6080/vnc.html for a reverse proxy that terminates tls itself
+  # screen sharing's login needs browser crypto, which only exists on https or localhost,
+  # so plain http only works from localhost or behind that proxy
   launchd.user.agents.novnc.serviceConfig = {
-    ProgramArguments = [
-      "${pkgs.novnc}/bin/novnc"
-      "--listen"
-      "6080"
-      "--vnc"
-      "localhost:5900"
-    ];
+    ProgramArguments = ["${novncWithCert}"];
     WorkingDirectory = userHome;
     RunAtLoad = true;
     KeepAlive = true;
