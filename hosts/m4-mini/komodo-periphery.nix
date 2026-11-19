@@ -18,31 +18,10 @@
   dockerData = "${userHome}/container/data";
   onboardingKeyFile = "${userHome}/.config/komodo/onboarding.key";
 
-  # official release binary instead of nixpkgs, whose komodo lags behind and makes core show
-  # a version mismatch. keep this in sync with the core version on lserver
-  peripheryVersion = "2.3.4";
-  # flat fetch so the hash is the sha256 github lists for the release asset
-  peripherySrc = pkgs.fetchurl {
-    url = "https://github.com/moghtech/komodo/releases/download/v${peripheryVersion}/periphery-apple";
-    sha256 = "20f66f9ac8302878f44843068ce3e32f60ea40fa8430b80a24d3e7c4b9b69a90";
-  };
-  # the release binary links homebrew's openssl@3 (/opt/homebrew/opt/openssl@3), which this
-  # box doesn't have. point it at nixpkgs' openssl and re-sign, since patching breaks the
-  # ad-hoc signature and arm64 macos won't run unsigned code
-  periphery =
-    pkgs.runCommand "komodo-periphery-${peripheryVersion}" {
-      nativeBuildInputs = [pkgs.cctools pkgs.darwin.sigtool];
-    } ''
-      install -Dm755 ${peripherySrc} $out/bin/periphery
-
-      for lib in libssl.3.dylib libcrypto.3.dylib; do
-        install_name_tool -change \
-          /opt/homebrew/opt/openssl@3/lib/$lib ${pkgs.openssl.out}/lib/$lib \
-          $out/bin/periphery
-      done
-
-      codesign -f -s - $out/bin/periphery
-    '';
+  # nixpkgs' komodo, which can lag behind core, so core may show a version mismatch. that's
+  # only a warning. the official periphery-apple release isn't a drop-in alternative: it
+  # links homebrew's openssl and reports itself as v0.0.0
+  periphery = pkgs.komodo;
 
   peripheryConfig = (pkgs.formats.toml {}).generate "periphery.config.toml" {
     root_directory = rootDir;
