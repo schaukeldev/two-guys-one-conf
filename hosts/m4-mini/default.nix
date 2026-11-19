@@ -55,6 +55,10 @@
     exec ${pkgs.novnc}/bin/novnc --listen 6080 --vnc localhost:5900 --cert "$cert" --key "$key"
   '';
 in {
+  imports = [
+    ./komodo-periphery.nix
+  ];
+
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   environment.variables = {
