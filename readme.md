@@ -64,7 +64,7 @@ after that, rebuild with
 sudo darwin-rebuild switch --flake /etc/nix-darwin#<host>
 ```
 
-for server hosts, see the manual steps at the top of `guys/server/default.nix`.
+for m4-mini, see the manual steps at the top of `hosts/m4-mini/default.nix`.
 
 ### manual steps
 

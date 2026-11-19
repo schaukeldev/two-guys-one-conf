@@ -59,7 +59,7 @@
           "docker-desktop"
           "finicky"
           "handy"
-          "iina"
+          "iina" # video player
           "iterm2"
           "linearmouse"
           "macpacker"
