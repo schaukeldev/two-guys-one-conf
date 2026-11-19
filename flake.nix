@@ -17,10 +17,11 @@
     nix-homebrew,
     nixpkgs,
   }: let
+    # guy is optional, hosts without one configure everything themselves
     mkDarwin = {
       system,
       host,
-      guy,
+      guy ? null,
     }:
       nix-darwin.lib.darwinSystem {
         inherit system;
@@ -28,16 +29,17 @@
           inherit self host guy inputs;
           isDarwin = true;
         };
-        modules = [
-          ./modules/tuckr.nix
-          ./guys/${guy}/default.nix
-          ./modules/common.nix
-          ./modules/darwin.nix
-          nix-homebrew.darwinModules.nix-homebrew
-          home-manager.darwinModules.home-manager
-          ./modules/homebrew.nix
-          ./hosts/${host}/default.nix
-        ];
+        modules =
+          [./modules/tuckr.nix]
+          ++ nixpkgs.lib.optional (guy != null) ./guys/${guy}/default.nix
+          ++ [
+            ./modules/common.nix
+            ./modules/darwin.nix
+            nix-homebrew.darwinModules.nix-homebrew
+            home-manager.darwinModules.home-manager
+            ./modules/homebrew.nix
+            ./hosts/${host}/default.nix
+          ];
       };
 
     mkNixos = {
@@ -79,6 +81,11 @@
         system = "aarch64-darwin";
         host = "m3-pro";
         guy = "oskar";
+      };
+      # sudo darwin-rebuild switch --flake ".#m4-mini"
+      m4-mini = mkDarwin {
+        system = "aarch64-darwin";
+        host = "m4-mini";
       };
       # sudo darwin-rebuild switch --flake ".#m4-pro"
       m4-pro = mkDarwin {

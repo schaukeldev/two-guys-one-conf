@@ -12,39 +12,59 @@ shared fentsoft nix config. _why didn't they just get another cup..._ 😔✊
 
 ### setup
 
-```sh
-xcode-select --install
-softwareupdate --install-rosetta --agree-to-license
-```
+hosts are the attribute names in `flake.nix` (`m2-air`, `m3-pro`, `m4-mini`, ...).
+
+1. command line tools (for git) and rosetta
+
+   ```sh
+   xcode-select --install
+   softwareupdate --install-rosetta --agree-to-license
+   ```
+
+2. install lix, answer **yes** to enabling flakes, then open a new terminal
+
+   ```sh
+   curl -sSf -L https://install.lix.systems/lix | sh -s -- install
+   ```
+
+3. clone the config to `/etc/nix-darwin` (the directory must be empty, add `-b <branch>` for a branch)
+
+   ```sh
+   sudo mkdir -p /etc/nix-darwin
+   sudo chown $(id -nu):$(id -ng) /etc/nix-darwin
+   git clone https://github.com/fentsoft/two-guys-one-conf /etc/nix-darwin
+   cd /etc/nix-darwin
+   ```
+
+4. desktop hosts only: sign in to the app store, xcode and wireguard are installed from there
+
+5. first switch, `darwin-rebuild` isn't installed yet so it runs through `nix run`
+
+   ```sh
+   sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake .#<host>
+   ```
+
+   if it aborts with "Unexpected files in /etc", rename each listed file and rerun, e.g.
+
+   ```sh
+   sudo mv /etc/nix/nix.conf /etc/nix/nix.conf.before-nix-darwin
+   ```
+
+6. open a new terminal, link dotfiles and apply plists
+
+   ```sh
+   tuckr add --only-files -fy \*
+   ./plist/apply.sh
+   defaultbrowser finicky # desktop hosts, in case the activation script didn't do it
+   ```
+
+after that, rebuild with
 
 ```sh
-curl -sSf -L https://install.lix.systems/lix | sh -s -- install
+sudo darwin-rebuild switch --flake /etc/nix-darwin#<host>
 ```
 
-```sh
-sudo mkdir -p /etc/nix-darwin
-sudo chown -R $(id -nu):$(id -ng) /etc/nix-darwin
-cd /etc/nix-darwin
-
-nix flake init -t nix-darwin/master
-sudo nix run nix-darwin/master#darwin-rebuild -- switch
-```
-
-```sh
-sudo darwin-rebuild switch --flake github:fentsoft/two-guys-one-conf#m2-air
-```
-
-```sh
-sudo rm -fr /etc/nix-darwin/*
-sudo git clone https://github.com/fentsoft/two-guys-one-conf /etc/nix-darwin
-sudo chown -R $(id -nu):$(id -ng) /etc/nix-darwin
-cd /etc/nix-darwin
-
-tuckr add --only-files -fy \*
-
-./plist/apply.sh
-defaultbrowser finicky # i have an activation script for this but last time it didn't work
-```
+for m4-mini, see the manual steps at the top of `hosts/m4-mini/default.nix`.
 
 ### manual steps
 

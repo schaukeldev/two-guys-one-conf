@@ -7,6 +7,7 @@
   ...
 }: let
   userHome = "/Users/${config.my.username}";
+  hasFinicky = lib.elem "finicky" config.my.homebrew.casks;
 in {
   users.users.${config.my.username}.home = userHome;
   security.pam.services.sudo_local.touchIdAuth = true;
@@ -29,7 +30,8 @@ in {
     };
   };
 
-  launchd.user.agents.set-browser = {
+  # only guys that install finicky get it set as the default browser
+  launchd.user.agents.set-browser = lib.mkIf hasFinicky {
     serviceConfig = {
       ProgramArguments = [
         "defaultbrowser"
@@ -48,12 +50,12 @@ in {
   };
 
   power.sleep = {
-    display = 20;
-    computer = 30;
+    display = lib.mkDefault 20;
+    computer = lib.mkDefault 30;
   };
 
-  environment.systemPackages = with pkgs; [
-    defaultbrowser
+  environment.systemPackages = lib.optionals hasFinicky [
+    pkgs.defaultbrowser
   ];
 
   system = {
