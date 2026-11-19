@@ -80,6 +80,12 @@
         host = "m3-pro";
         guy = "oskar";
       };
+      # sudo darwin-rebuild switch --flake ".#m4-mini"
+      m4-mini = mkDarwin {
+        system = "aarch64-darwin";
+        host = "m4-mini";
+        guy = "server";
+      };
       # sudo darwin-rebuild switch --flake ".#m4-pro"
       m4-pro = mkDarwin {
         system = "aarch64-darwin";

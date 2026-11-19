@@ -50,6 +50,9 @@ jobs:
           - name: m3-pro
             runner: macos-26
             attr: darwinConfigurations.m3-pro.config.system.build.toplevel
+          - name: m4-mini
+            runner: macos-26
+            attr: darwinConfigurations.m4-mini.config.system.build.toplevel
           - name: m4-pro
             runner: macos-26
             attr: darwinConfigurations.m4-pro.config.system.build.toplevel

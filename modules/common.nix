@@ -49,11 +49,13 @@ in {
   };
   options.my.git = {
     userName = lib.mkOption {
-      type = lib.types.str;
-      description = "Git user.name to set for the primary user.";
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      description = "Git user.name to set for the primary user. Null disables identity and signing.";
     };
     userEmail = lib.mkOption {
-      type = lib.types.str;
+      type = lib.types.nullOr lib.types.str;
+      default = null;
       description = "Git user.email to set for the primary user.";
     };
   };
@@ -79,17 +81,20 @@ in {
         home.stateVersion = "24.05";
         programs.git = {
           enable = true;
-          settings = {
-            gpg.format = "ssh";
-            user.signingkey = "${userHome}/.ssh/id_ed25519.pub";
-            commit.gpgsign = true;
-            tag.gpgsign = true;
-            user.name = config.my.git.userName;
-            user.email = config.my.git.userEmail;
-            pull.rebase = true;
-            rebase.autoStash = true;
-            init.defaultBranch = "main";
-          };
+          settings =
+            {
+              pull.rebase = true;
+              rebase.autoStash = true;
+              init.defaultBranch = "main";
+            }
+            // lib.optionalAttrs (config.my.git.userName != null) {
+              gpg.format = "ssh";
+              user.signingkey = "${userHome}/.ssh/id_ed25519.pub";
+              commit.gpgsign = true;
+              tag.gpgsign = true;
+              user.name = config.my.git.userName;
+              user.email = config.my.git.userEmail;
+            };
         };
       };
     };
