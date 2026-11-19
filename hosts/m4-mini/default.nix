@@ -7,7 +7,8 @@
 # - system settings > general > sharing: enable screen sharing (needed for novnc too)
 # - grant rustdesk screen recording + accessibility, enable "start on login" in docker desktop
 # - xcodes install --latest && xcodes runtimes install "iOS <version>" (needs an apple id login,
-#   or download the .xip elsewhere and use xcodes install --path <file>.xip)
+#   or download the .xip elsewhere and use xcodes install --path <file>.xip), then
+#   ln -s /Applications/Xcode-<version>.app /Applications/Xcode.app for the dock
 # - gitlab-runner register --executor shell (writes ~/.gitlab-runner/config.toml, not in repo)
 {
   config,
@@ -78,6 +79,14 @@ in {
     NSColorSimulatedHardwareEnclosureNumber = null;
     AppleAccentColor = 6;
   };
+
+  # m2-air's dock, limited to apps installed here, helium instead of brave
+  system.defaults.dock.persistent-apps = [
+    "/System/Applications/System Settings.app"
+    "/Applications/Helium.app"
+    "/Applications/iTerm.app"
+    "/Applications/Xcode.app"
+  ];
 
   # - power ------------------------------------------------------------------------------
 
