@@ -59,6 +59,7 @@
           "docker-desktop"
           "finicky"
           "handy"
+          "home-assistant"
           "iina" # video player
           "iterm2"
           "linearmouse"
