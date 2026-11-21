@@ -104,7 +104,13 @@ in {
     NSColorSimulateHardwareAccent = null;
     NSColorSimulatedHardwareEnclosureNumber = null;
     AppleAccentColor = 6;
+
+    # with _HIHideMenuBar below: "automatically hide and show the menu bar" = never
+    AppleMenuBarVisibleInFullscreen = true;
   };
+
+  # auto-hiding menu bar is a pain over remote desktop
+  system.defaults.NSGlobalDomain._HIHideMenuBar = false;
 
   # m2-air's dock, limited to apps installed here, helium instead of brave
   system.defaults.dock.persistent-apps = [
@@ -112,6 +118,7 @@ in {
     "/Applications/Helium.app"
     "/Applications/iTerm.app"
     "/Applications/Xcode.app"
+    "/Applications/Docker.app"
   ];
 
   # - power ------------------------------------------------------------------------------
