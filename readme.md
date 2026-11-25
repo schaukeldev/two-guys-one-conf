@@ -32,7 +32,7 @@ hosts are the attribute names in `flake.nix` (`m2-air`, `m3-pro`, `m4-mini`, ...
    ```sh
    sudo mkdir -p /etc/nix-darwin
    sudo chown $(id -nu):$(id -ng) /etc/nix-darwin
-   git clone https://github.com/fentsoft/two-guys-one-conf /etc/nix-darwin
+   git clone https://github.com/schaukeldev/two-guys-one-conf /etc/nix-darwin
    cd /etc/nix-darwin
    ```
 
