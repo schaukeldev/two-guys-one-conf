@@ -10,6 +10,7 @@
   ];
 
   networking.hostName = "lserver";
+  networking.networkmanager.settings.connection."ipv6.addr-gen-mode" = 0;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   environment.systemPackages = with pkgs; [
