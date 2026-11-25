@@ -25,7 +25,7 @@
 
   peripheryConfig = (pkgs.formats.toml {}).generate "periphery.config.toml" {
     root_directory = rootDir;
-    core_address = "https://komodo.zuhause.einkacken.net";
+    core_address = "https://komodo.wein.lol";
     connect_as = "m4-mini";
     default_terminal_command = "zsh";
   };
