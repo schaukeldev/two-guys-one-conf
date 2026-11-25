@@ -16,6 +16,7 @@ in {
     "/media/raids" = {
       device = "/dev/md0";
       fsType = "ext4";
+      options = ["nofail" "x-systemd.device-timeout=5s"];
     };
     "/media/hserver-home" = {
       device = "//hserver/o";
