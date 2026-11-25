@@ -34,6 +34,16 @@
     "/sbin"
   ];
 
+  # novnc reads its default settings from defaults.json in the web root
+  novncDefaults = (pkgs.formats.json {}).generate "novnc-defaults.json" {
+    show_dot = true; # show dot when no cursor
+  };
+  novncWeb = pkgs.runCommand "novnc-web" {} ''
+    cp -r ${pkgs.novnc}/share/webapps/novnc $out
+    chmod u+w $out
+    cp ${novncDefaults} $out/defaults.json
+  '';
+
   # creates a self-signed cert on first start. without --ssl-only, websockify detects tls
   # per connection, so the same port still answers plain http
   # no spaces: the novnc launcher passes the cert path to websockify unquoted
@@ -52,7 +62,8 @@
       chmod 600 "$key"
     fi
 
-    exec ${pkgs.novnc}/bin/novnc --listen 6080 --vnc localhost:5900 --cert "$cert" --key "$key"
+    exec ${pkgs.novnc}/bin/novnc --listen 6080 --vnc localhost:5900 \
+      --cert "$cert" --key "$key" --web ${novncWeb}
   '';
 in {
   imports = [
