@@ -71,6 +71,8 @@ in {
     isHidden = false;
   };
 
+  my.backgrounds.${ciUser} = "Teal";
+
   users.knownGroups = [dockerGroup];
   users.groups.${dockerGroup} = {
     gid = 600;

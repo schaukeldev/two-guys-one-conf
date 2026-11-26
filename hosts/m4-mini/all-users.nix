@@ -6,7 +6,8 @@
 # - all of o's macos preferences (system.defaults: dock, finder, keyboard, menu bar, ...),
 #   by replaying the defaults script nix-darwin generates for o. so changing system.defaults
 #   anywhere in this config changes it for everyone
-# - a solid background colour per account
+# - a solid background colour per account, from my.backgrounds (set where each account is
+#   defined: ci.nix, people.nix)
 # - the generic dotfiles (shell, btop, croc, linearmouse), linked only where the account has
 #   no file of its own yet. o's ssh config and ssh host names stay o's
 {
@@ -20,15 +21,12 @@
   # - background -------------------------------------------------------------------------
 
   # o's is set by modules/darwin.nix (Stone)
-  backgrounds = {
-    ci = "Teal";
-  };
   defaultBackground = "Space Gray";
 
   backgroundCases = lib.concatStrings (lib.mapAttrsToList (user: colour: ''
       ${lib.escapeShellArg user}) colour=${lib.escapeShellArg colour} ;;
     '')
-    backgrounds);
+    config.my.backgrounds);
 
   # - macos preferences ------------------------------------------------------------------
 
@@ -100,7 +98,18 @@
     /usr/bin/osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"/System/Library/Desktop Pictures/Solid Colors/$colour.png\" as POSIX file" || true
   '';
 in {
-  assertions = [
+  options.my.backgrounds = lib.mkOption {
+    type = lib.types.attrsOf lib.types.str;
+    default = {};
+    example = {ci = "Teal";};
+    description = ''
+      Solid desktop background colour per account (a file name from
+      /System/Library/Desktop Pictures/Solid Colors, without .png). Accounts not listed get
+      ${defaultBackground}.
+    '';
+  };
+
+  config.assertions = [
     {
       assertion = lib.hasInfix oPrefix oDefaults;
       message = "all-users.nix: nix-darwin's user defaults script changed format, update oPrefix";
@@ -108,7 +117,7 @@ in {
   ];
 
   # o's dock, through nix-darwin, and through the script above everyone else's
-  system.defaults.dock = {
+  config.system.defaults.dock = {
     persistent-apps = [
       "/System/Applications/Apps.app"
       "/System/Applications/System Settings.app"
@@ -123,8 +132,8 @@ in {
 
   # command (not ProgramArguments) makes nix-darwin wait for /nix/store, which may not be
   # mounted yet right after boot, when ci auto-logs in
-  launchd.agents.m4-mini-user-settings.command = "${applySettings}";
-  launchd.agents.m4-mini-user-settings.serviceConfig = {
+  config.launchd.agents.m4-mini-user-settings.command = "${applySettings}";
+  config.launchd.agents.m4-mini-user-settings.serviceConfig = {
     LimitLoadToSessionType = "Aqua";
     RunAtLoad = true;
   };

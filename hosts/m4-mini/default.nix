@@ -56,6 +56,7 @@ in {
     ./all-users.nix
     ./ci.nix
     ./komodo-periphery.nix
+    ./people.nix
   ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
