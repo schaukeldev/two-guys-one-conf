@@ -26,10 +26,17 @@
     autoconnect = true; # connect on page load, straight to the login prompt
     resize = "scale"; # local scaling: fit the remote screen into the browser window
   };
+  # nix store files are dated 1970, so browsers cache them heuristically for years and a
+  # changed defaults.json never shows up. fetch it without the cache instead (no-cache
+  # wouldn't do: the server answers "not modified" since the date never changes)
   novncWeb = pkgs.runCommand "novnc-web" {} ''
     cp -r ${pkgs.novnc}/share/webapps/novnc $out
-    chmod u+w $out
+    chmod u+w $out $out/vnc.html
     cp ${novncDefaults} $out/defaults.json
+
+    substituteInPlace $out/vnc.html \
+      --replace-fail "fetch('./defaults.json')" "fetch('./defaults.json', { cache: 'no-store' })" \
+      --replace-fail "fetch('./mandatory.json')" "fetch('./mandatory.json', { cache: 'no-store' })"
   '';
 
   # creates a self-signed cert on first start. without --ssl-only, websockify detects tls
