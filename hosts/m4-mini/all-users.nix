@@ -23,6 +23,23 @@
   # o's is set by modules/darwin.nix (Stone)
   defaultBackground = "Space Gray";
 
+  # sets the picture on every screen through NSWorkspace, in-process. the System Events way
+  # (like o's set-wallpaper agent) needs an automation permission per account, which can be
+  # missed or denied and then fails silently
+  setBackground = pkgs.writeText "set-background.js" ''
+    ObjC.import("AppKit");
+    function run(argv) {
+      const url = $.NSURL.fileURLWithPath(argv[0]);
+      const workspace = $.NSWorkspace.sharedWorkspace;
+      const screens = $.NSScreen.screens;
+      for (let i = 0; i < screens.count; i++) {
+        workspace.setDesktopImageURLForScreenOptionsError(
+          url, screens.objectAtIndex(i), $.NSDictionary.dictionary, null);
+      }
+      return "background set on " + screens.count + " screen(s): " + argv[0];
+    }
+  '';
+
   backgroundCases = lib.concatStrings (lib.mapAttrsToList (user: colour: ''
       ${lib.escapeShellArg user}) colour=${lib.escapeShellArg colour} ;;
     '')
@@ -89,13 +106,13 @@
     }
     ${linkCommands}
 
-    # background, last: the first time macos asks whether this may control System Events,
-    # and waits until someone answers
+    # background
     colour=${lib.escapeShellArg defaultBackground}
     case "$(id -un)" in
       ${backgroundCases}
     esac
-    /usr/bin/osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"/System/Library/Desktop Pictures/Solid Colors/$colour.png\" as POSIX file" || true
+    /usr/bin/osascript -l JavaScript ${setBackground} \
+      "/System/Library/Desktop Pictures/Solid Colors/$colour.png" || true
   '';
 in {
   options.my.backgrounds = lib.mkOption {
