@@ -53,6 +53,7 @@
   '';
 in {
   imports = [
+    ./all-users.nix
     ./ci.nix
     ./komodo-periphery.nix
   ];
@@ -108,15 +109,6 @@ in {
 
   # auto-hiding menu bar is a pain over remote desktop
   system.defaults.NSGlobalDomain._HIHideMenuBar = false;
-
-  # m2-air's dock, limited to apps installed here, helium instead of brave
-  system.defaults.dock.persistent-apps = [
-    "/System/Applications/System Settings.app"
-    "/Applications/Helium.app"
-    "/Applications/iTerm.app"
-    "/Applications/Xcode.app"
-    "/Applications/Docker.app"
-  ];
 
   # - power ------------------------------------------------------------------------------
 

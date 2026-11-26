@@ -92,6 +92,9 @@ in {
     # xcode ui tests and debugging without an admin prompt, for ci
     DevToolsSecurity -enable > /dev/null
     dseditgroup -o edit -a ${ciUser} -t user _developer
+
+    # screen sharing (and novnc) is limited to this group, which only holds admins otherwise
+    dseditgroup -o edit -a ${ciUser} -t user com.apple.access_screensharing
   '';
 
   # - services ---------------------------------------------------------------------------
