@@ -1,60 +1,125 @@
-# dock and menu bar for every account on this box, including ones added later.
+# o's look and feel for every account on this box, including ones added later. only the
+# desktop background differs per account, so you can tell sessions apart over remote desktop.
 #
-# nix-darwin only writes these preferences for the primary user (o), so a system agent sets
-# them at each login for everyone else. the dock's apps are only set once per account, so
-# people can rearrange their dock afterwards. bump dockVersion to push a changed list again.
+# nix-darwin only writes preferences for the primary user (o). a system agent runs at every
+# login of every other account and applies:
+# - all of o's macos preferences (system.defaults: dock, finder, keyboard, menu bar, ...),
+#   by replaying the defaults script nix-darwin generates for o. so changing system.defaults
+#   anywhere in this config changes it for everyone
+# - a solid background colour per account
+# - the generic dotfiles (shell, btop, croc, linearmouse), linked only where the account has
+#   no file of its own yet. o's ssh config and ssh host names stay o's
 {
   config,
   lib,
   pkgs,
   ...
 }: let
-  dockApps = [
-    "/System/Applications/Apps.app"
-    "/System/Applications/System Settings.app"
-    "/Applications/Helium.app"
-    "/Applications/iTerm.app"
-    "/Applications/Xcode.app"
-    "/Applications/Docker.app"
-  ];
-  dockVersion = "1";
+  primaryUser = config.my.username;
 
-  dockutil = "${pkgs.dockutil}/bin/dockutil";
+  # - background -------------------------------------------------------------------------
+
+  # o's is set by modules/darwin.nix (Stone)
+  backgrounds = {
+    ci = "Teal";
+  };
+  defaultBackground = "Space Gray";
+
+  backgroundCases = lib.concatStrings (lib.mapAttrsToList (user: colour: ''
+      ${lib.escapeShellArg user}) colour=${lib.escapeShellArg colour} ;;
+    '')
+    backgrounds);
+
+  # - macos preferences ------------------------------------------------------------------
+
+  # every command in nix-darwin's script runs as o through this prefix. drop it so they run
+  # as whoever logs in, and point o's paths (dock folders, ByHost prefs) at their home
+  oDefaults = config.system.activationScripts.userDefaults.text;
+  oPrefix = ''launchctl asuser "$(id -u -- ${primaryUser})" sudo --user=${primaryUser} -- '';
+  userDefaults = pkgs.writeText "user-defaults.sh" (builtins.replaceStrings
+    [oPrefix "~${primaryUser}/" "/Users/${primaryUser}/" "killall -qu ${primaryUser} Dock"]
+    ["" "@HOME@/" "@HOME@/" "killall Dock"]
+    oDefaults);
+
+  # - dotfiles ---------------------------------------------------------------------------
+
+  dotfiles = "${config.environment.variables.TUCKR_HOME}/Configs";
+
+  # o's .zshrc only adds o's ssh hosts before sourcing the shared one
+  zshrc = pkgs.writeText "zshrc" ''
+    source "$HOME/.zshrc_shared"
+  '';
+
+  # home path -> source
+  links = {
+    ".zshenv" = "${dotfiles}/zsh_shared/.zshenv";
+    ".zshrc" = "${zshrc}";
+    ".zshrc_shared" = "${dotfiles}/zsh_shared/.zshrc_shared";
+    ".zshrc_darwin" = "${dotfiles}/zsh_shared/.zshrc_darwin";
+    ".zshrc_nixos" = "${dotfiles}/zsh_shared/.zshrc_nixos";
+    ".p10k.zsh" = "${dotfiles}/zsh_shared/.p10k.zsh";
+    ".config/btop/btop.conf" = "${dotfiles}/btop/.config/btop/btop.conf";
+    ".config/croc/receive.json" = "${dotfiles}/croc/.config/croc/receive.json";
+    ".config/linearmouse/linearmouse.json" = "${dotfiles}/linearmouse_#oskar/.config/linearmouse/linearmouse.json";
+  };
+
+  linkCommands = lib.concatStrings (lib.mapAttrsToList (path: source: ''
+      link ${lib.escapeShellArg path} ${lib.escapeShellArg source}
+    '')
+    links);
+
+  # - login script -----------------------------------------------------------------------
 
   applySettings = pkgs.writeShellScript "m4-mini-user-settings" ''
     set -euo pipefail
 
-    # o's preferences are managed by nix-darwin itself
-    [ "$(id -un)" = "${config.my.username}" ] && exit 0
+    # o gets all of this from nix-darwin itself
+    [ "$(id -un)" = ${lib.escapeShellArg primaryUser} ] && exit 0
 
-    # menu bar never hides, on the desktop and in full screen
-    defaults write -g _HIHideMenuBar -bool false
-    defaults write -g AppleMenuBarVisibleInFullscreen -bool true
+    exec >>"$HOME/Library/Logs/m4-mini-user-settings.log" 2>&1
+    echo "--- $(date)"
 
-    defaults write com.apple.dock autohide -bool false
+    # macos preferences
+    sed "s|@HOME@|$HOME|g" ${userDefaults} | ${pkgs.bash}/bin/bash
 
-    marker="$HOME/Library/Preferences/m4-mini-dock-v${dockVersion}"
-    if [ ! -e "$marker" ]; then
-      ${dockutil} --remove all --no-restart
-      for app in ${lib.escapeShellArgs dockApps}; do
-        if [ -e "$app" ]; then
-          ${dockutil} --add "$app" --no-restart
-        fi
-      done
-      touch "$marker"
-    fi
+    # background
+    colour=${lib.escapeShellArg defaultBackground}
+    case "$(id -un)" in
+      ${backgroundCases}
+    esac
+    /usr/bin/osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"/System/Library/Desktop Pictures/Solid Colors/$colour.png\" as POSIX file" || true
 
-    killall Dock || true
+    # dotfiles
+    link() {
+      local target="$HOME/$1"
+      if [ -e "$target" ] || [ -L "$target" ]; then return; fi
+      mkdir -p "$(dirname "$target")"
+      ln -s "$2" "$target"
+    }
+    ${linkCommands}
   '';
 in {
-  # o's dock, through nix-darwin
+  assertions = [
+    {
+      assertion = lib.hasInfix oPrefix oDefaults;
+      message = "all-users.nix: nix-darwin's user defaults script changed format, update oPrefix";
+    }
+  ];
+
+  # o's dock, through nix-darwin, and through the script above everyone else's
   system.defaults.dock = {
-    persistent-apps = dockApps;
+    persistent-apps = [
+      "/System/Applications/Apps.app"
+      "/System/Applications/System Settings.app"
+      "/Applications/Helium.app"
+      "/Applications/iTerm.app"
+      "/Applications/Xcode.app"
+      "/Applications/Docker.app"
+    ];
     # modules/darwin.nix auto-hides the dock everywhere, a pain over remote desktop
     autohide = lib.mkForce false;
   };
 
-  # everyone else's, at each login
   launchd.agents.m4-mini-user-settings.serviceConfig = {
     ProgramArguments = ["${applySettings}"];
     LimitLoadToSessionType = "Aqua";
