@@ -24,6 +24,7 @@
   novncDefaults = (pkgs.formats.json {}).generate "novnc-defaults.json" {
     show_dot = true; # show dot when no cursor
     autoconnect = true; # connect on page load, straight to the login prompt
+    resize = "scale"; # local scaling: fit the remote screen into the browser window
   };
   novncWeb = pkgs.runCommand "novnc-web" {} ''
     cp -r ${pkgs.novnc}/share/webapps/novnc $out
