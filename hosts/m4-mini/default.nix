@@ -1,15 +1,15 @@
 # mac mini build server (gitlab runner for ios) + general purpose box. has no guy, so
 # everything a guy would set lives here.
 #
+# the ci account (auto-login, gitlab runner, docker) lives in ci.nix, komodo in
+# komodo-periphery.nix. both have their own manual steps.
+#
 # manual steps after the first switch:
-# - turn off filevault, then enable auto-login for the user (system settings > users & groups)
-#   so the per-user services below come back after a reboot / power failure
+# - turn off filevault, auto-login needs it off
 # - system settings > general > sharing: enable screen sharing (needed for novnc too)
-# - grant rustdesk screen recording + accessibility, enable "start on login" in docker desktop
 # - xcodes install --latest && xcodes runtimes install "iOS <version>" (needs an apple id login,
 #   or download the .xip elsewhere and use xcodes install --path <file>.xip), then
 #   ln -s /Applications/Xcode-<version>.app /Applications/Xcode.app for the dock
-# - gitlab-runner register --executor shell (writes ~/.gitlab-runner/config.toml, not in repo)
 {
   config,
   host,
@@ -19,20 +19,6 @@
 }: let
   userHome = "/Users/${config.my.username}";
   logDir = "${userHome}/Library/Logs";
-
-  # launchd agents don't get the login shell PATH, so ci jobs would miss nix/brew tools
-  servicePath = lib.concatStringsSep ":" [
-    "${config.homebrew.prefix}/bin"
-    "${config.homebrew.prefix}/sbin"
-    "/etc/profiles/per-user/${config.my.username}/bin"
-    "/run/current-system/sw/bin"
-    "/nix/var/nix/profiles/default/bin"
-    "/usr/local/bin"
-    "/usr/bin"
-    "/bin"
-    "/usr/sbin"
-    "/sbin"
-  ];
 
   # novnc reads its default settings from defaults.json in the web root
   novncDefaults = (pkgs.formats.json {}).generate "novnc-defaults.json" {
@@ -67,6 +53,7 @@
   '';
 in {
   imports = [
+    ./ci.nix
     ./komodo-periphery.nix
   ];
 
@@ -101,7 +88,6 @@ in {
         "linearmouse"
         "macpacker"
         "raycast"
-        "rustdesk"
         "stats"
         "zed"
       ];
@@ -161,28 +147,6 @@ in {
     KeepAlive = true;
     StandardOutPath = "${logDir}/novnc.out.log";
     StandardErrorPath = "${logDir}/novnc.err.log";
-  };
-
-  # - gitlab runner ----------------------------------------------------------------------
-
-  # runs as the logged-in user (not nix-darwin's services.gitlab-runner daemon) because ios
-  # builds need a gui session for code signing keychains and simulators
-  launchd.user.agents.gitlab-runner.serviceConfig = {
-    ProgramArguments = [
-      "${pkgs.gitlab-runner}/bin/gitlab-runner"
-      "run"
-      "--working-directory"
-      userHome
-      "--config"
-      "${userHome}/.gitlab-runner/config.toml"
-    ];
-    EnvironmentVariables.PATH = servicePath;
-    WorkingDirectory = userHome;
-    RunAtLoad = true;
-    KeepAlive = true;
-    ProcessType = "Interactive";
-    StandardOutPath = "${logDir}/gitlab-runner.out.log";
-    StandardErrorPath = "${logDir}/gitlab-runner.err.log";
   };
 
   # - nix store --------------------------------------------------------------------------

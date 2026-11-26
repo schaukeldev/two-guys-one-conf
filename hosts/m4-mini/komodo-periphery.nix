@@ -5,7 +5,11 @@
 #   mkdir -p ~/.config/komodo && pbpaste > ~/.config/komodo/onboarding.key
 #   launchctl kickstart -k gui/$(id -u)/org.nixos.komodo-periphery
 # once the server exists in core, the key file can be deleted. docker desktop has to be
-# running for container management.
+# running in ci's session for container management (see ci.nix).
+#
+# periphery runs as o, so its keys stay in o's private home. stacks and their volumes live
+# in /Users/Shared/komodo instead, because docker runs as ci and can only mount what ci can
+# read. that folder belongs to the docker-access group.
 {
   config,
   lib,
@@ -14,8 +18,9 @@
 }: let
   userHome = "/Users/${config.my.username}";
   logDir = "${userHome}/Library/Logs";
-  rootDir = "${userHome}/komodo";
-  dockerData = "${userHome}/container/data";
+  keyDir = "${userHome}/komodo/keys";
+  rootDir = "/Users/Shared/komodo";
+  dockerData = "${rootDir}/data";
   onboardingKeyFile = "${userHome}/.config/komodo/onboarding.key";
 
   # nixpkgs' komodo, which can lag behind core, so core may show a version mismatch. that's
@@ -25,6 +30,9 @@
 
   peripheryConfig = (pkgs.formats.toml {}).generate "periphery.config.toml" {
     root_directory = rootDir;
+    # both default to ${rootDir}/keys, which ci could read
+    private_key = "file:${keyDir}/periphery.key";
+    core_public_keys = ["file:${keyDir}/core.pub"];
     core_address = "https://komodo.wein.lol";
     connect_as = "m4-mini";
     default_terminal_command = "zsh";
@@ -34,7 +42,6 @@
   peripheryWithKey = pkgs.writeShellScript "komodo-periphery" ''
     set -euo pipefail
 
-    mkdir -p "${rootDir}" "${dockerData}"
     if [ -s "${onboardingKeyFile}" ]; then
       export PERIPHERY_ONBOARDING_KEY_FILE="${onboardingKeyFile}"
     fi
@@ -54,13 +61,20 @@
     "/sbin"
   ];
 in {
-  # runs as the user (not root) so it can reach docker desktop's per-user socket
+  # setgid, so files periphery creates keep the docker-access group and ci's docker can
+  # read them
+  system.activationScripts.postActivation.text = lib.mkAfter ''
+    mkdir -p ${dockerData}
+    chown ${config.my.username}:docker-access ${rootDir} ${dockerData}
+    chmod 2770 ${rootDir} ${dockerData}
+  '';
+
   launchd.user.agents.komodo-periphery.serviceConfig = {
     ProgramArguments = ["${peripheryWithKey}"];
     EnvironmentVariables = {
       PATH = servicePath;
-      # docker desktop's per-user socket, /var/run/docker.sock isn't linked on this box
-      DOCKER_HOST = "unix://${userHome}/.docker/run/docker.sock";
+      # ci's docker desktop, through the relay in ci.nix
+      DOCKER_HOST = "unix:///Users/Shared/docker/docker.sock";
       # stacks use $DOCKER_DATA for volume paths, same as on lserver
       DOCKER_DATA = dockerData;
     };
