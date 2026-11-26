@@ -139,8 +139,11 @@ in {
   # - https://<host>:6080/vnc.html with a self-signed cert (accept the warning once)
   # - http://<host>:6080/vnc.html for a reverse proxy that terminates tls itself
   # screen sharing's login needs browser crypto, which only exists on https or localhost,
-  # so plain http only works from localhost or behind that proxy
-  launchd.user.agents.novnc.serviceConfig = {
+  # so plain http only works from localhost or behind that proxy.
+  # a daemon running as o rather than o's agent, so it's up from boot whoever is logged in
+  # (ci auto-logs in, o usually isn't). it only relays to screen sharing, no gui needed
+  launchd.daemons.novnc.serviceConfig = {
+    UserName = config.my.username;
     ProgramArguments = ["${novncWithCert}"];
     WorkingDirectory = userHome;
     RunAtLoad = true;
