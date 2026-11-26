@@ -23,6 +23,7 @@
   # novnc reads its default settings from defaults.json in the web root
   novncDefaults = (pkgs.formats.json {}).generate "novnc-defaults.json" {
     show_dot = true; # show dot when no cursor
+    autoconnect = true; # connect on page load, straight to the login prompt
   };
   novncWeb = pkgs.runCommand "novnc-web" {} ''
     cp -r ${pkgs.novnc}/share/webapps/novnc $out
