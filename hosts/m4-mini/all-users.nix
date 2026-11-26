@@ -116,7 +116,9 @@ in {
     }
   ];
 
-  # o's dock, through nix-darwin, and through the script above everyone else's
+  # o's dock, through nix-darwin, and through the script above everyone else's.
+  # no docker: only ci runs docker desktop (it starts at ci's login), and starting it in any
+  # other account collides with ci's
   config.system.defaults.dock = {
     persistent-apps = [
       "/System/Applications/Apps.app"
@@ -124,7 +126,6 @@ in {
       "/Applications/Helium.app"
       "/Applications/iTerm.app"
       "/Applications/Xcode.app"
-      "/Applications/Docker.app"
     ];
     # modules/darwin.nix auto-hides the dock everywhere, a pain over remote desktop
     autohide = lib.mkForce false;
