@@ -134,9 +134,11 @@ in {
   # so plain http only works from localhost or behind that proxy.
   # a daemon running as o rather than o's agent, so it's up from boot whoever is logged in
   # (ci auto-logs in, o usually isn't). it only relays to screen sharing, no gui needed
+  # command (not ProgramArguments) makes nix-darwin wait for /nix/store, which isn't mounted
+  # yet when launchd starts daemons at boot
+  launchd.daemons.novnc.command = "${novncWithCert}";
   launchd.daemons.novnc.serviceConfig = {
     UserName = config.my.username;
-    ProgramArguments = ["${novncWithCert}"];
     WorkingDirectory = userHome;
     RunAtLoad = true;
     KeepAlive = true;

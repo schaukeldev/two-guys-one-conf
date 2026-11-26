@@ -36,19 +36,19 @@
 
   # system agents load in every gui session. these only do something in ci's: elsewhere they
   # exit 0 right away, and KeepAlive.SuccessfulExit = false stops launchd restarting them.
-  # logs go to the user's own Library/Logs, since another user can't open ci's
+  # logs go to the user's own Library/Logs, since another user can't open ci's.
+  # command (not ProgramArguments) makes nix-darwin wait for /nix/store, which may not be
+  # mounted yet right after boot, when ci auto-logs in
   ciOnlyAgent = name: command: {
-    serviceConfig = {
-      ProgramArguments = [
-        "${pkgs.writeShellScript name ''
-          set -euo pipefail
-          [ "$(id -un)" = "${ciUser}" ] || exit 0
+    command = "${pkgs.writeShellScript name ''
+      set -euo pipefail
+      [ "$(id -un)" = "${ciUser}" ] || exit 0
 
-          exec >>"$HOME/Library/Logs/${name}.log" 2>&1
-          cd "$HOME"
-          exec ${command}
-        ''}"
-      ];
+      exec >>"$HOME/Library/Logs/${name}.log" 2>&1
+      cd "$HOME"
+      exec ${command}
+    ''}";
+    serviceConfig = {
       EnvironmentVariables.PATH = servicePath;
       LimitLoadToSessionType = "Aqua";
       RunAtLoad = true;

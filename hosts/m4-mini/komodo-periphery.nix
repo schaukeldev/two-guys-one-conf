@@ -3,7 +3,7 @@
 #
 # first connect: create an onboarding key in core (server settings), then on this box
 #   mkdir -p ~/.config/komodo && pbpaste > ~/.config/komodo/onboarding.key
-#   launchctl kickstart -k gui/$(id -u)/org.nixos.komodo-periphery
+#   sudo launchctl kickstart -k system/org.nixos.komodo-periphery
 # once the server exists in core, the key file can be deleted. docker desktop has to be
 # running in ci's session for container management (see ci.nix).
 #
@@ -69,9 +69,14 @@ in {
     chmod 2770 ${rootDir} ${dockerData}
   '';
 
-  launchd.user.agents.komodo-periphery.serviceConfig = {
-    ProgramArguments = ["${peripheryWithKey}"];
+  # a daemon running as o rather than o's agent, so it's up from boot whoever is logged in
+  # (ci auto-logs in, o usually isn't). launchd gives it o's groups, so it can use the
+  # docker-access socket. command makes nix-darwin wait for /nix/store at boot
+  launchd.daemons.komodo-periphery.command = "${peripheryWithKey}";
+  launchd.daemons.komodo-periphery.serviceConfig = {
+    UserName = config.my.username;
     EnvironmentVariables = {
+      HOME = userHome;
       PATH = servicePath;
       # ci's docker desktop, through the relay in ci.nix
       DOCKER_HOST = "unix:///Users/Shared/docker/docker.sock";

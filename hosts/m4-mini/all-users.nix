@@ -82,13 +82,6 @@
     # macos preferences
     sed "s|@HOME@|$HOME|g" ${userDefaults} | ${pkgs.bash}/bin/bash
 
-    # background
-    colour=${lib.escapeShellArg defaultBackground}
-    case "$(id -un)" in
-      ${backgroundCases}
-    esac
-    /usr/bin/osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"/System/Library/Desktop Pictures/Solid Colors/$colour.png\" as POSIX file" || true
-
     # dotfiles
     link() {
       local target="$HOME/$1"
@@ -97,6 +90,14 @@
       ln -s "$2" "$target"
     }
     ${linkCommands}
+
+    # background, last: the first time macos asks whether this may control System Events,
+    # and waits until someone answers
+    colour=${lib.escapeShellArg defaultBackground}
+    case "$(id -un)" in
+      ${backgroundCases}
+    esac
+    /usr/bin/osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"/System/Library/Desktop Pictures/Solid Colors/$colour.png\" as POSIX file" || true
   '';
 in {
   assertions = [
@@ -120,8 +121,10 @@ in {
     autohide = lib.mkForce false;
   };
 
+  # command (not ProgramArguments) makes nix-darwin wait for /nix/store, which may not be
+  # mounted yet right after boot, when ci auto-logs in
+  launchd.agents.m4-mini-user-settings.command = "${applySettings}";
   launchd.agents.m4-mini-user-settings.serviceConfig = {
-    ProgramArguments = ["${applySettings}"];
     LimitLoadToSessionType = "Aqua";
     RunAtLoad = true;
   };
